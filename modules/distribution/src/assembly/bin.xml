@@ -366,25 +366,25 @@
         </file>
 
         <file>
-            <source>INSTALL.txt</source>
+            <source>../../INSTALL.txt</source>
             <outputDirectory>wso2emm-${pom.version}</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
         <file>
-            <source>README.txt</source>
+            <source>../../README.md</source>
             <outputDirectory>wso2emm-${pom.version}</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
         <file>
-            <source>LICENSE.txt</source>
+            <source>../../LICENSE.txt</source>
             <outputDirectory>wso2emm-${pom.version}</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
         <file>
-            <source>release-notes.html</source>
+            <source>../../release-notes.html</source>
             <outputDirectory>wso2emm-${pom.version}</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
