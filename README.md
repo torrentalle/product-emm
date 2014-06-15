@@ -1,6 +1,6 @@
 WSO2 Enterprise Mobility Manager (EMM)
 ----------------------
-Welcome to the WSO2 Enterprise Mobility Manager (EMM) 1.1.0 release
+Welcome to the WSO2 Enterprise Mobility Manager (EMM) ${product.version} release
 =======
 
 Key Features
@@ -125,7 +125,7 @@ WSO2 Enterprise Mobility Manager (EMM) Binary Distribution Directory Structure
       This document contains information on installing WSO2 EMM.
       
     - release-notes.html
-      Release information for WSO2 EMM 1.1.0
+      Release information for WSO2 EMM ${product.version}
 
 
 Support
