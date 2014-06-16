@@ -31,7 +31,7 @@
 								<artifactItem>
 									<groupId>org.wso2.carbon</groupId>
 									<artifactId>wso2carbon-core</artifactId>
-									<version>${carbon.kernal.version}</version>
+									<version>${carbon.kernel.version}</version>
 									<type>zip</type>
 									<overWrite>true</overWrite>
 									<outputDirectory>target</outputDirectory>
@@ -39,7 +39,7 @@
 							</artifactItems>
 						</configuration>
 					</execution>
-			    <!--Kernal patches -->
+			    <!--Kernel patches -->
                             <execution>
                                 <id>2-unpack-kernel-patch</id>
                                 <phase>test</phase>
@@ -50,7 +50,7 @@
                                     <artifactItems>
                                         <artifactItem>
                                             <groupId>org.wso2.carbon</groupId>
-                                            <artifactId>WSO2-CARBON-PATCH-${carbon.kernal.version}</artifactId>
+                                            <artifactId>WSO2-CARBON-PATCH-${carbon.kernel.version}</artifactId>
                                             <version>0001</version>
                                             <type>zip</type>
                                             <overWrite>true</overWrite>
@@ -69,7 +69,7 @@
                                     <artifactItems>
                                         <artifactItem>
                                             <groupId>org.wso2.carbon</groupId>
-                                            <artifactId>WSO2-CARBON-PATCH-${carbon.kernal.version}</artifactId>
+                                            <artifactId>WSO2-CARBON-PATCH-${carbon.kernel.version}</artifactId>
                                             <version>0002</version>
                                             <type>zip</type>
                                             <overWrite>true</overWrite>
@@ -88,7 +88,7 @@
                                     <artifactItems>
                                         <artifactItem>
                                             <groupId>org.wso2.carbon</groupId>
-                                            <artifactId>WSO2-CARBON-PATCH-${carbon.kernal.version}</artifactId>
+                                            <artifactId>WSO2-CARBON-PATCH-${carbon.kernel.version}</artifactId>
                                             <version>0003</version>
                                             <type>zip</type>
                                             <overWrite>true</overWrite>
@@ -107,7 +107,7 @@
                                     <artifactItems>
                                         <artifactItem>
                                             <groupId>org.wso2.carbon</groupId>
-                                            <artifactId>WSO2-CARBON-PATCH-${carbon.kernal.version}</artifactId>
+                                            <artifactId>WSO2-CARBON-PATCH-${carbon.kernel.version}</artifactId>
                                             <version>0004</version>
                                             <type>zip</type>
                                             <overWrite>true</overWrite>
@@ -126,7 +126,7 @@
                                     <artifactItems>
                                         <artifactItem>
                                             <groupId>org.wso2.carbon</groupId>
-                                            <artifactId>WSO2-CARBON-PATCH-${carbon.kernal.version}</artifactId>
+                                            <artifactId>WSO2-CARBON-PATCH-${carbon.kernel.version}</artifactId>
                                             <version>0005</version>
                                             <type>zip</type>
                                             <overWrite>true</overWrite>
@@ -145,7 +145,7 @@
                                     <artifactItems>
                                         <artifactItem>
                                             <groupId>org.wso2.carbon</groupId>
-                                            <artifactId>WSO2-CARBON-PATCH-${carbon.kernal.version}</artifactId>
+                                            <artifactId>WSO2-CARBON-PATCH-${carbon.kernel.version}</artifactId>
                                             <version>0006</version>
                                             <type>zip</type>
                                             <overWrite>true</overWrite>
@@ -400,7 +400,7 @@
 							<metadataRepository>file:${basedir}/target/p2-repo</metadataRepository>
 							<artifactRepository>file:${basedir}/target/p2-repo</artifactRepository>
 							<destination>
-								${basedir}/target/wso2carbon-core-${carbon.kernal.version}/repository/components
+								${basedir}/target/wso2carbon-core-${carbon.kernel.version}/repository/components
 							</destination>
 							<deleteOldProfileFiles>true</deleteOldProfileFiles>
 							<features>
@@ -664,7 +664,7 @@
 						<configuration>
 							<tasks>
 								<replace token="false" value="true"
-											dir="target/wso2carbon-core-${carbon.kernal.version}/repository/components">
+											dir="target/wso2carbon-core-${carbon.kernel.version}/repository/components">
 									<include name="**/bundles.info"/>
 								</replace>
 							</tasks>
