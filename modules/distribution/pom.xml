@@ -188,11 +188,10 @@
 									<fileset dir="../apps"></fileset>
 								</copy>
 <!-- -->
-                             
-								<copy todir="target/wso2carbon-core-${carbon.kernel.version}/repository/components/patches/patch0001"
-										overwrite="true">
-									<fileset dir="src/repository/plugins"></fileset>
-								</copy>
+                                <copy todir="target/wso2carbon-core-${carbon.kernel.version}/repository/components/patches/patch0001"
+                                      overwrite="true">
+                                    <fileset dir="src/repository/plugins"></fileset>
+                                </copy>
 
 								<copy todir="target/wso2carbon-core-${carbon.kernel.version}/repository/components/plugins"
 										overwrite="true">
