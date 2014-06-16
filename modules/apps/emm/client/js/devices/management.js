@@ -411,7 +411,7 @@ $(".btn-enroll").click(function() {
     var enrollURL = $(this).data('url') +  "/emm/api/device_enroll";
          
 	noty({
-                        text : '<u>Enroll URL</u>: ' + enrollURL + '<div  id="qrcode" style="width:200px; padding-left:45px"></div>',
+                       text : '<u>Enroll URL</u>:<br><span style="word-wrap:break-word;">' + enrollURL + '</span><div  id="qrcode" style="width:200px; padding-left:45px"></div>',
                         buttons : [{
                             addClass : 'btn btn-orange',
                             text : 'OK',
