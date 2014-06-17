@@ -264,6 +264,7 @@ jQuery("#form-asset-create").submit(function(e) {
 	
 	$("#txtMarketHidden").val($("#txtMarket").val());
 	$("#txtOSHidden").val($("#txtOS").val());
+    $("#version").val($("#txtVersion").val());
 	
 	if($("#txtMarketHidden").val() == 'VPP'){
 		$('#appmeta').val(JSON.stringify({package: $("#txtPackagename").val(), version: $("#txtVersion").val()}));
