@@ -15,7 +15,7 @@ var render=function(theme,data,meta,require){
 		listPartial='add-asset';
 		
 		if(data.data.meta.shortName=='mobileapp'){
-			log.info('Special rendering case for mobileapp-using add-mobilepp.hbs');
+			log.debug('Special rendering case for mobileapp-using add-mobilepp.hbs');
 			listPartial='add-mobileapp';
 		}		
 		

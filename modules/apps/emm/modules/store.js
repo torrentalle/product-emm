@@ -252,7 +252,7 @@ var store = (function() {
             var pagination = true;
             var fApps = [];
             var page = 1;
-            log.info("Tenant ID: " + getTenantID());
+            log.debug("Tenant ID: " + getTenantID());
             do {
                 var url = configsFile.mam.store_location + "/apis/assets/mobileapp" + "?domain=" + getTenantDomainFromID(getTenantID()) + "&page=" + page;
                 log.debug("url: " + url);

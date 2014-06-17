@@ -266,7 +266,7 @@ var app = {
                 bundleversion: app.attributes.overview_bundleversion,
                 appname: app.attributes.overview_name
             });
-            log.info(iosManifest);
+            log.debug(iosManifest);
             response.contentType = "application/xml";
             print(iosManifest);
         });

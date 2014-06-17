@@ -57,9 +57,9 @@ var filterModule = function () {
         //     role_obj = cleanUsername(role_obj);
         //     userRoles[i] = role_obj;
         // };
-        log.info(userRoles);
-        log.info(data);
-        log.info("_____");
+        log.debug(userRoles);
+        log.debug(data);
+        log.debug("_____");
         //Go through each data item
         for (var index in data) {
 
@@ -78,13 +78,13 @@ var filterModule = function () {
                 var commonRoles = utility.intersect(userRoles, permissableRoles, function (a, b) {
                     return (a == b);
                 });
-                log.info(permissableRoles);
-                log.info(userRoles);
-                log.info(commonRoles);
-                log.info("****");
+                log.debug(permissableRoles);
+                log.debug(userRoles);
+                log.debug(commonRoles);
+                log.debug("****");
                 //Check if we have common roles
                 if (commonRoles.length > 0) {
-                    log.info('adding asset'+stringify(item));
+                    log.debug('adding asset'+stringify(item));
                     items.push(item);
                 }
             }

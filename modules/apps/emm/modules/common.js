@@ -355,7 +355,7 @@ var getDatabase = function(){
   		try{
   			driver.query("SELECT 1 FROM dual");
   		}catch(e){
-  			log.info("New connection was taken");
+  			log.debug("New connection was taken");
   			db = null;
   		}
   	}

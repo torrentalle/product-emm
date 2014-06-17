@@ -609,7 +609,7 @@ Store.prototype.search = function (options, paging) {
     if (type) {
         
         var assetz = this.assetManager(type).search(options, builtPaging);
-        log.info(assetz);
+        log.debug(assetz);
         for (i = 0; i < assetz.length; i++) {
             assetz[i].indashboard = this.isuserasset(assetz[i].id, type);
         }

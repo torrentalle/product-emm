@@ -232,7 +232,7 @@ var iosemm = (function() {
 
 						responseData = apnsStatus.getResponseData();
 						var data = {};
-                        log.info("RESPONSE DATA >>>>>>>>>>>>>> " + responseData);
+                        log.debug("RESPONSE DATA >>>>>>>>>>>>>> " + responseData);
 						data.identifier = responseData.identifier;
 						data.redemptionCode = message.redemptionCode;
 						device.sendMessageToIOSDevice({
