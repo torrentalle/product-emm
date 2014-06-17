@@ -1,26 +1,8 @@
-/*
- * *
- *  *  Copyright (c) WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
- *  *
- *  *  Licensed under the Apache License, Version 2.0 (the "License");
- *  *  you may not use this file except in compliance with the License.
- *  *  You may obtain a copy of the License at
- *  *
- *  *        http://www.apache.org/licenses/LICENSE-2.0
- *  *
- *  *  Unless required by applicable law or agreed to in writing, software
- *  *  distributed under the License is distributed on an "AS IS" BASIS,
- *  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  *  See the License for the specific language governing permissions and
- *  *  limitations under the License.
- *
- */
-
 describe('Device Module', function () {
 
     describe('Register Android operation - Device Module', function () {
         var device_module = require('/modules/device.js').device;
-        var deviceInfo = {"username": "user", "regid": "1234", "platform": "Android", "osversion": "4.1.3", "type": "BYOD", "properties": {"device": "GS4", "imei": "1212122234", "imsi": "223456776", "model": "S5"}, "vendor": "Samsung", "email": "user@test.com", "wifi_mac": "3c:97:0e:84:43:05"};
+        var deviceInfo = {"username": "user", "regid": "1234", "platform": "Android", "osversion": "4.1.3", "type": "BYOD", "properties": {"device": "GS4", "imei": "1212122234", "imsi": "223456776", "model": "S5"}, "vendor": "Samsung", "email": "user@test.com", "mac": "3c:97:0e:84:43:05"};
         var db, device, driver;
 
         function initModule() {
@@ -73,7 +55,7 @@ describe('Device Module', function () {
         it('Test unRegisterAndroid', function () {
             try {
                 initModule();
-                driver.query("insert into devices(id, tenant_id, user_id, platform_id, reg_id, os_version, properties, created_date, status, byod, vendor, udid, push_token, wifi_mac) values ('1',  '-1234', 'user', '1', 'APA91bEa', '4.1.2', '{\"device\":\"GT-I9100G\",\"model\":\"GT-I9100G\",\"imsi\":\"413025000690522\",\"imei\":\"358401042931186\"}', '2014-05-07 18:40:45', 'A', '1', 'samsung', '0', NULL, '92:1C:52:F3:53:52')");
+                driver.query("insert into devices(id, tenant_id, user_id, platform_id, reg_id, os_version, properties, created_date, status, byod, vendor, udid, push_token, mac) values ('1',  '-1234', 'user', '1', 'APA91bEa', '4.1.2', '{\"device\":\"GT-I9100G\",\"model\":\"GT-I9100G\",\"imsi\":\"413025000690522\",\"imei\":\"358401042931186\"}', '2014-05-07 18:40:45', 'A', '1', 'samsung', '0', NULL, '92:1C:52:F3:53:52')");
                 var ctx = {"regid": reg_id};
                 var deviceOp = device.unRegisterAndroid(ctx);
                 expect(deviceOp).toBe(true);
@@ -99,7 +81,7 @@ describe('Device Module', function () {
         it('Test unRegisterIOS device', function () {
             try {
                 initModule();
-                driver.query("insert into devices(id, tenant_id, user_id, platform_id, reg_id, os_version, properties, created_date, status, byod, vendor, udid, push_token, wifi_mac) values ('2',  '-1234', 'user', '2', '', '7.1', '{\"device\":\"iPhone\",\"model\":\"5c\",\"imsi\":\"413025010690522\",\"imei\":\"358401043931186\"}', '2014-05-07 18:40:45', 'A', '1', 'Apple', 'APA91bEa', NULL, '92:1C:52:F3:53:52')");
+                driver.query("insert into devices(id, tenant_id, user_id, platform_id, reg_id, os_version, properties, created_date, status, byod, vendor, udid, push_token, mac) values ('2',  '-1234', 'user', '2', '', '7.1', '{\"device\":\"iPhone\",\"model\":\"5c\",\"imsi\":\"413025010690522\",\"imei\":\"358401043931186\"}', '2014-05-07 18:40:45', 'A', '1', 'Apple', 'APA91bEa', NULL, '92:1C:52:F3:53:52')");
                 var ctx = {"udid": reg_id};
                 var deviceOp = device.unRegisterIOS(ctx);
                 expect(deviceOp).toBe(true);
@@ -167,7 +149,7 @@ describe('Device Module', function () {
 
     describe('Register IOS operation - Device Module', function () {
         var device_module = require('/modules/device.js').device;
-        var ctx = {"auth_token": "-1234", "username": "user", "udid": "12345", "platform": "iPhone", "osversion": "7.1", "type": "BYOD", "properties": {"device": "iPhone", "imei": "12121222345", "imsi": "223456776", "model": "5c"}, "vendor": "Apple", "email": "user@test.com", "wifi_mac": "4c:97:0e:84:43:05"};
+        var ctx = {"auth_token": "-1234", "username": "user", "udid": "12345", "platform": "iPhone", "osversion": "7.1", "type": "BYOD", "properties": {"device": "iPhone", "imei": "12121222345", "imsi": "223456776", "model": "5c"}, "vendor": "Apple", "email": "user@test.com", "mac": "4c:97:0e:84:43:05"};
         var db, device;
 
         function initModule() {
@@ -206,7 +188,7 @@ describe('Device Module', function () {
                 db = new Database("WSO2_EMM_DB");
                 device = new device_module(db);
                 driver = require('driver').driver(db);
-                driver.query("insert into devices(id, tenant_id, user_id, platform_id, reg_id, os_version, properties, created_date, status, byod, vendor, udid, push_token, wifi_mac) values ('2',  '-1234', 'user', '2', '', '7.1', '{\"device\":\"iPhone\",\"model\":\"5c\",\"imsi\":\"413025010690522\",\"imei\":\"358401043931186\"}', '2014-05-07 18:40:45', 'A', '1', 'Apple', 'APA91bEa', NULL, '92:1C:52:F3:53:52')");
+                driver.query("insert into devices(id, tenant_id, user_id, platform_id, reg_id, os_version, properties, created_date, status, byod, vendor, udid, push_token, mac) values ('2',  '-1234', 'user', '2', '', '7.1', '{\"device\":\"iPhone\",\"model\":\"5c\",\"imsi\":\"413025010690522\",\"imei\":\"358401043931186\"}', '2014-05-07 18:40:45', 'A', '1', 'Apple', 'APA91bEa', NULL, '92:1C:52:F3:53:52')");
             } catch (e) {
                 log.error(e);
             }
@@ -223,7 +205,7 @@ describe('Device Module', function () {
             try {
                 tearUp();
                 var deviceOp = device.updateiOSTokens(tokens);
-                expect(deviceOp).toBe(false);
+                expect(deviceOp).toBe(true);
             } catch (e) {
                 log.error(e);
             } finally {
@@ -280,12 +262,12 @@ describe('Device Module', function () {
             db.close();
         }
 
-        var ctx = {"username": "user", "deviceid": "2", "role": "user"};
+        var ctx = {"username": "user", "deviceid": "2", "roles": ["user"]};
 
         it('Test getFeaturesFromDevice from ios device', function () {
             try {
                 initModule();
-                driver.query("insert into devices(id, tenant_id, user_id, platform_id, reg_id, os_version, properties, created_date, status, byod, vendor, udid, push_token, wifi_mac) values ('2',  '-1234', 'user', '2', '', '7.1', '{\"device\":\"iPhone\",\"model\":\"5c\",\"imsi\":\"413025010690522\",\"imei\":\"358401043931186\"}', '2014-05-07 18:40:45', 'A', '1', 'Apple', 'APA91bEa', NULL, '92:1C:52:F3:53:52')");
+                driver.query("insert into devices(id, tenant_id, user_id, platform_id, reg_id, os_version, properties, created_date, status, byod, vendor, udid, push_token, mac) values ('2',  '-1234', 'user', '2', '', '7.1', '{\"device\":\"iPhone\",\"model\":\"5c\",\"imsi\":\"413025010690522\",\"imei\":\"358401043931186\"}', '2014-05-07 18:40:45', 'A', '1', 'Apple', 'APA91bEa', NULL, '92:1C:52:F3:53:52')");
                 var features = device.getFeaturesFromDevice(ctx);
                 expect(features.length).not.toBe(0);
             } catch (e) {
@@ -299,7 +281,7 @@ describe('Device Module', function () {
         it('Test getFeaturesFromDevice from android device', function () {
             try {
                 initModule();
-                driver.query("insert into devices(id, tenant_id, user_id, platform_id, reg_id, os_version, properties, created_date, status, byod, vendor, udid, push_token,wifi_mac) values ('2',  '-1234', 'user', '1', 'APA91bEa', '4.1.2', '{\"device\":\"GT-I9100G\",\"model\":\"GT-I9100G\",\"imsi\":\"413025000690522\",\"imei\":\"358401042931186\"}', '2014-05-07 18:40:45', 'A', '1', 'samsung', '0', NULL, '92:1C:52:F3:53:52')");
+                driver.query("insert into devices(id, tenant_id, user_id, platform_id, reg_id, os_version, properties, created_date, status, byod, vendor, udid, push_token,mac) values ('2',  '-1234', 'user', '1', 'APA91bEa', '4.1.2', '{\"device\":\"GT-I9100G\",\"model\":\"GT-I9100G\",\"imsi\":\"413025000690522\",\"imei\":\"358401042931186\"}', '2014-05-07 18:40:45', 'A', '1', 'samsung', '0', NULL, '92:1C:52:F3:53:52')");
                 var features = device.getFeaturesFromDevice(ctx);
                 expect(features.length).not.toBe(0);
             } catch (e) {
@@ -333,7 +315,7 @@ describe('Device Module', function () {
                 db = new Database("WSO2_EMM_DB");
                 device = new device_module(db);
                 driver = require('driver').driver(db);
-                driver.query("insert into devices(id, tenant_id, user_id, platform_id, reg_id, os_version, properties, created_date, status, byod, vendor, udid, push_token, wifi_mac) values ('2',  '-1234', 'user', '2', '', '7.1', '{\"device\":\"iPhone\",\"model\":\"5c\",\"imsi\":\"413025010690522\",\"imei\":\"358401043931186\"}', '2014-05-07 18:40:45', 'A', '1', 'Apple', 'APA91bEa', NULL, '92:1C:52:F3:53:52')");
+                driver.query("insert into devices(id, tenant_id, user_id, platform_id, reg_id, os_version, properties, created_date, status, byod, vendor, udid, push_token, mac) values ('2',  '-1234', 'user', '2', '', '7.1', '{\"device\":\"iPhone\",\"model\":\"5c\",\"imsi\":\"413025010690522\",\"imei\":\"358401043931186\"}', '2014-05-07 18:40:45', 'A', '1', 'Apple', 'APA91bEa', NULL, '92:1C:52:F3:53:52')");
             } catch (e) {
                 log.error(e);
             }
@@ -394,7 +376,7 @@ describe('Device Module', function () {
         it('Test isregistered for android device', function () {
             try {
                 initModule();
-                driver.query("insert into devices(id, tenant_id, user_id, platform_id, reg_id, os_version, properties, created_date, status, byod, vendor, udid, push_token, wifi_mac) values ('1',  '-1234', 'user', '1', 'APA91bEa', '4.1.2', '{\"device\":\"GT-I9100G\",\"model\":\"GT-I9100G\",\"imsi\":\"413025000690522\",\"imei\":\"358401042931186\"}', '2014-05-07 18:40:45', 'A', '1', 'samsung', '0', NULL, '92:1C:52:F3:53:52')");
+                driver.query("insert into devices(id, tenant_id, user_id, platform_id, reg_id, os_version, properties, created_date, status, byod, vendor, udid, push_token, mac) values ('1',  '-1234', 'user', '1', 'APA91bEa', '4.1.2', '{\"device\":\"GT-I9100G\",\"model\":\"GT-I9100G\",\"imsi\":\"413025000690522\",\"imei\":\"358401042931186\"}', '2014-05-07 18:40:45', 'A', '1', 'samsung', '0', NULL, '92:1C:52:F3:53:52')");
                 var ctx = {"regid": udid};
                 var status = device.isRegistered(ctx);
                 expect(status).toBe(true);
@@ -422,7 +404,7 @@ describe('Device Module', function () {
         it('Test isregistered for ios device', function () {
             try {
                 initModule();
-                driver.query("insert into devices(id, tenant_id, user_id, platform_id, reg_id, os_version, properties, created_date, status, byod, vendor, udid, push_token, wifi_mac) values ('2',  '-1234', 'user', '2', '', '7.1', '{\"device\":\"iPhone\",\"model\":\"5c\",\"imsi\":\"413025010690522\",\"imei\":\"358401043931186\"}', '2014-05-07 18:40:45', 'A', '1', 'Apple', 'APA91bEa', NULL, '92:1C:52:F3:53:52')");
+                driver.query("insert into devices(id, tenant_id, user_id, platform_id, reg_id, os_version, properties, created_date, status, byod, vendor, udid, push_token, mac) values ('2',  '-1234', 'user', '2', '', '7.1', '{\"device\":\"iPhone\",\"model\":\"5c\",\"imsi\":\"413025010690522\",\"imei\":\"358401043931186\"}', '2014-05-07 18:40:45', 'A', '1', 'Apple', 'APA91bEa', NULL, '92:1C:52:F3:53:52')");
                 var ctx = {"udid": "APA91bEa"};
                 var status = device.isRegistered(ctx);
                 expect(status).toBe(true);
@@ -464,8 +446,9 @@ describe('Device Module', function () {
         it('Test getSenderid', function () {
             try {
                 tearUp();
-                var result = device.getSenderId();
-                expect(result).not.toBe(null);
+                var result = device.getSenderId({"domain":""});
+                var expectResult = '{"notifier" : "LOCAL", "notifierInterval" : "60000", "sender_id" : ""}';
+                expect(stringify(result)).toBe(expectResult);
             } catch (e) {
                 log.error(e);
             }
@@ -494,7 +477,7 @@ describe('Device Module', function () {
         it('Test saveiOSPushToken operation', function () {
             try {
                 tearUp();
-                driver.query("insert into devices(id, tenant_id, user_id, platform_id, reg_id, os_version, properties, created_date, status, byod, vendor, udid, push_token, wifi_mac) values ('2',  '-1234', 'user', '2', '', '7.1', '{\"device\":\"iPhone\",\"model\":\"5c\",\"imsi\":\"413025010690522\",\"imei\":\"358401043931186\"}', '2014-05-07 18:40:45', 'A', '1', 'Apple', 'APA91bEa', NULL, '92:1C:52:F3:53:52')");
+                driver.query("insert into devices(id, tenant_id, user_id, platform_id, reg_id, os_version, properties, created_date, status, byod, vendor, udid, push_token, mac) values ('2',  '-1234', 'user', '2', '', '7.1', '{\"device\":\"iPhone\",\"model\":\"5c\",\"imsi\":\"413025010690522\",\"imei\":\"358401043931186\"}', '2014-05-07 18:40:45', 'A', '1', 'Apple', 'APA91bEa', NULL, '92:1C:52:F3:53:52')");
                 var result = device.saveiOSPushToken({'pushToken':'12345','udid':udid});
                 expect(result).toBe('SUCCESS');
             } catch (e) {
@@ -540,7 +523,7 @@ describe('Device Module', function () {
         it('Test getCurrentDeviceState', function () {
             try {
                 tearUp();
-                driver.query("insert into devices(id, tenant_id, user_id, platform_id, reg_id, os_version, properties, created_date, status, byod, vendor, udid, push_token, wifi_mac) values ('1',  '-1234', 'user', '2', '', '7.1', '{\"device\":\"iPhone\",\"model\":\"5c\",\"imsi\":\"413025010690522\",\"imei\":\"358401043931186\"}', '2014-05-07 18:40:45', 'A', '1', 'Apple', 'APA91bEa', NULL, '92:1C:52:F3:53:52')");
+                driver.query("insert into devices(id, tenant_id, user_id, platform_id, reg_id, os_version, properties, created_date, status, byod, vendor, udid, push_token, mac) values ('1',  '-1234', 'user', '2', '', '7.1', '{\"device\":\"iPhone\",\"model\":\"5c\",\"imsi\":\"413025010690522\",\"imei\":\"358401043931186\"}', '2014-05-07 18:40:45', 'A', '1', 'Apple', 'APA91bEa', NULL, '92:1C:52:F3:53:52')");
                 var dev = driver.query("SELECT id FROM devices WHERE udid = ?", udid);
                 if(dev != null && dev != undefined && dev[0] != null && dev[0] != undefined) {
                     var id = parse(dev[0].id);
@@ -592,7 +575,7 @@ describe('Device Module', function () {
         it('Test getPendingOperationsFromDevice', function () {
             try {
                 tearUp();
-                driver.query("insert into devices(id, tenant_id, user_id, platform_id, reg_id, os_version, properties, created_date, status, byod, vendor, udid, push_token, wifi_mac) values ('1',  '-1234', 'user', '2', '', '7.1', '{\"device\":\"iPhone\",\"model\":\"5c\",\"imsi\":\"413025010690522\",\"imei\":\"358401043931186\"}', '2014-05-07 18:40:45', 'A', '1', 'Apple', 'APA91bEa', NULL, '92:1C:52:F3:53:52')");
+                driver.query("insert into devices(id, tenant_id, user_id, platform_id, reg_id, os_version, properties, created_date, status, byod, vendor, udid, push_token, mac) values ('1',  '-1234', 'user', '2', '', '7.1', '{\"device\":\"iPhone\",\"model\":\"5c\",\"imsi\":\"413025010690522\",\"imei\":\"358401043931186\"}', '2014-05-07 18:40:45', 'A', '1', 'Apple', 'APA91bEa', NULL, '92:1C:52:F3:53:52')");
                 driver.query("insert into notifications(id, group_id, user_id, device_id, message, status, sent_date, feature_code, feature_description, tenant_id) values ('1', '-1', 'user', '1', 'hi', 'P', '2014-05-07 18:10:46', '500A', 'Device Information', '-1234')");
                 var result = device.getPendingOperationsFromDevice(ctx);
                 var expectedResult = JSON.parse('{"feature_code" : "500A", "message" : "hi", "id" : "1", "received_data" : null}');
@@ -641,7 +624,7 @@ describe('Device Module', function () {
         it('Test updateLocation', function () {
             try {
                 tearUp();
-                driver.query("insert into devices(id, tenant_id, user_id, platform_id, reg_id, os_version, properties, created_date, status, byod, vendor, udid, push_token, wifi_mac) values ('1',  '-1234', 'user', '2', '', '7.1', '{\"device\":\"iPhone\",\"model\":\"5c\",\"imsi\":\"413025010690522\",\"imei\":\"358401043931186\"}', '2014-05-07 18:40:45', 'A', '1', 'Apple', 'APA91bEa', NULL, '92:1C:52:F3:53:52')");
+                driver.query("insert into devices(id, tenant_id, user_id, platform_id, reg_id, os_version, properties, created_date, status, byod, vendor, udid, push_token, mac) values ('1',  '-1234', 'user', '2', '', '7.1', '{\"device\":\"iPhone\",\"model\":\"5c\",\"imsi\":\"413025010690522\",\"imei\":\"358401043931186\"}', '2014-05-07 18:40:45', 'A', '1', 'Apple', 'APA91bEa', NULL, '92:1C:52:F3:53:52')");
                 var ctx = new Object();
                 ctx.latitude = "1.0";
                 ctx.longitude = "1.0";
