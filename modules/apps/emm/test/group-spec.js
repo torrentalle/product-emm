@@ -246,11 +246,8 @@ describe('Group Module',function(){
 
         it('Test roleExists function with non-existing groups', function () {
             initModule();
-            ctx = {'name':role,'users':[]};
-            group.addGroup(ctx);
-            var result = group.addGroup(ctx);
-            expect(result.status).toBe("ALLREADY_EXIST");
-            group.deleteGroup({'groupid':role});
+            var result = group.roleExists({'groupid':role});
+            expect(result).toBe(false);
             closeDB();
         });
     });
@@ -351,10 +348,18 @@ describe('Group Module',function(){
             closeDB();
         });
 
-        it('Test getGroupsByType function by not having roles of selected type', function () {
+        it('Test getGroupsByType function by querying for emmadmin roles', function () {
             initModule();
-            var roleList = group.getGroupsByType({'type':'user'});
-            expect(roleList.length).not.toBe(0);
+            var roleList = group.getGroupsByType({'type':'emmadmin'});
+            log.info(stringify(roleList));
+            var roleExists = false ;
+            for(var i=0;i<roleList.length;i++){
+                if("emmadmin"==roleList[i].type){
+                    roleExists = true;
+                    break;
+                }
+            }
+            expect(roleExists).toBe(true);
             closeDB();
         });
     });
