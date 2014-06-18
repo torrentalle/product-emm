@@ -351,7 +351,6 @@ describe('Group Module',function(){
         it('Test getGroupsByType function by querying for emmadmin roles', function () {
             initModule();
             var roleList = group.getGroupsByType({'type':'emmadmin'});
-            log.info(stringify(roleList));
             var roleExists = false ;
             for(var i=0;i<roleList.length;i++){
                 if("emmadmin"==roleList[i].type){
