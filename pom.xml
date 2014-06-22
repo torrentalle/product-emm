@@ -74,16 +74,32 @@
 	</modules>
 
 	<properties>
-		<ues.version>1.0.0</ues.version>
-		<es.version>1.0.0</es.version>
+		<!-- jaggery versions -->
+		<jaggery.feature.version>0.9.0.ALPHA4.wso2v3</jaggery.feature.version>
+		<caramel.feature.version>1.0.0</caramel.feature.version>
+		<jaggery.test.version>1.0.0</jaggery.test.version>
+		
+		<!-- Carbon -->
 		<carbon.kernel.version>4.2.0</carbon.kernel.version>
 		<carbon.platform.version>4.2.0</carbon.platform.version>
 
-		<!-- jaggery versions -->
-		<jaggery.feature.version>0.9.0.ALPHA4.wso2v3</jaggery.feature.version>
+		<carbon.platform.version.4.2.1>4.2.1</carbon.platform.version.4.2.1>
+        <carbon.platform.version.4.2.2>4.2.2</carbon.platform.version.4.2.2>
+        <carbon.platform.version.4.2.3>4.2.3</carbon.platform.version.4.2.3>
+        <carbon.platform.version.4.2.4>4.2.4</carbon.platform.version.4.2.4>
+
 		<carbon.p2.plugin.version>1.5.3</carbon.p2.plugin.version>
+		<!-- Stratos -->
 		<stratos.version>2.2.0</stratos.version>
-		<stratos.patch.version.221>2.2.1</stratos.patch.version.221>
+		<stratos.version.2.2.1>2.2.1</stratos.version.2.2.1>
+
+		<!-- Enterprise Store -->
+		<ues.version>1.0.0</ues.version>
+		<es.version>1.0.0</es.version>
+
+		<!-- APIM Feature -->
+		<carbon.apim.1.2.0>1.2.0</carbon.apim.1.2.0>
+		<carbon.apim.1.2.1>1.2.1</carbon.apim.1.2.1>
 
 		<!-- maven plugin versions -->
 		<build-helper-maven-plugin.version>1.7</build-helper-maven-plugin.version>
@@ -104,21 +120,7 @@
 		<maven-project-info-report-plugin.version>2.4</maven-project-info-report-plugin.version>
 		<maven-buildnumber-plugin.version>1.1</maven-buildnumber-plugin.version>
 		<maven-dependency-plugin.version>2.4</maven-dependency-plugin.version>
-		<caramel.feature.version>1.0.0</caramel.feature.version>
-        <handlebars.feature.version>1.0.0-SNAPSHOT</handlebars.feature.version>
-        <markdown.feature.version>1.0.0-SNAPSHOT</markdown.feature.version>
-        <carbon.feature.version>1.0.0</carbon.feature.version>
-        <process.feature.version>1.0.0</process.feature.version>
-        <uuid.feature.version>1.0.0</uuid.feature.version>
-        <event.feature.version>1.0.0</event.feature.version>
-        <login.feature.version>1.0.0</login.feature.version>
-        <permission.feature.version>1.0.0</permission.feature.version>
-        <registration.feature.version>1.0.0</registration.feature.version>
-        <sso.feature.version>1.0.0</sso.feature.version>
-        <store.feature.version>1.0.0</store.feature.version>
-        <ues.feature.version>1.0.0</ues.feature.version>
-        <claims.feature.version>1.0.0</claims.feature.version>
-        <sugarcane.feature.version>1.0.0-SNAPSHOT</sugarcane.feature.version>
+		
 		<wso2.slf4j.version>1.5.10.wso2v1</wso2.slf4j.version>
 		<sso.hostobjects.version>1.0.1</sso.hostobjects.version>
 		<rhino.osgi.version>1.7.0.R4.wso2v1-SNAPSHOT</rhino.osgi.version>
