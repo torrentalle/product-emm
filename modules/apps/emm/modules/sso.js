@@ -12,7 +12,7 @@ var ssoMod = require("sso");
 	    }
 	    return sso_sessions;
  	}
- 	sso.configure = function(issuer, appName, keyStoreParams, transport, ssoService, responseSign){
+ 	sso.configure = function(issuer, appName, keyStoreParams, address, transport, ssoService, responseSign){
  		sso.issuer = issuer;
  		sso.appName = appName;
  		sso.relayState = "/"+appName;

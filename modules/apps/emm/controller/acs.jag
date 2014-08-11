@@ -7,7 +7,7 @@ var keyStoreParams = {
     keyStorePassword: dataConfi.ssoConfiguration.keyStorePassword,
     identityAlias: dataConfi.ssoConfiguration.identityAlias
 }
-sso.configure(dataConfi.ssoConfiguration.issuer, "emm", keyStoreParams);
+sso.configure(dataConfi.ssoConfiguration.issuer, "emm", keyStoreParams, dataConfi.ssoConfiguration.identityProviderURL);
 sso.acs(function(loggedInUser) {
     session.put("LOGGED_IN_USER", loggedInUser);
     session.put("Loged", "true");
