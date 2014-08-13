@@ -95,7 +95,7 @@ var device = (function () {
         }
 
         router.get('devices/ios/download', function(ctx) {
-            config = require('/config/emm.js').config();
+            config = require('/config/config.json');
             var iosManifest = compileTemplate("/ios_utils/plisttemplate.hbs", {url:config.device.ios.location, bundleid: config.device.ios.bundleid, bundleversion: config.device.ios.version,  appname: config.device.ios.appname});
             response.contentType = "application/xml";
             print(iosManifest);
@@ -123,7 +123,7 @@ var device = (function () {
             }
         });
 
-		router.post('devices/isregistered/1.0.0', function(ctx){
+		router.post('devices/isregistered', function(ctx){
 		    var result = device.isRegistered(ctx);
             log.debug(result);
 		    if(result){
@@ -151,7 +151,7 @@ var device = (function () {
             response.sendRedirect("/emm/downloadapp");
 		});
 
-		router.post('devices/register/1.0.0', function(ctx){
+		router.post('devices/register', function(ctx){
 		    var userAgent= request.getHeader("User-Agent");
 		    var android = userAgent.indexOf("Android");
 
@@ -181,7 +181,7 @@ var device = (function () {
 		    print(result);
 		});
 
-		router.post('devices/unregister/1.0.0', function(ctx){
+		router.post('devices/unregister', function(ctx){
 		    var result = device.unRegisterAndroid(ctx);
 		});
 		
@@ -262,7 +262,7 @@ var device = (function () {
 		    var result = device.updateiOSTokens(ctx);
 		});
 
-        router.get('devices/license/1.0.0', function(ctx){
+        router.get('devices/license', function(ctx){
             //log.debug("Request >>>>> " + stringify(ctx));
             var result = device.getLicenseAgreement(ctx);
             if (result == null) {
@@ -273,7 +273,7 @@ var device = (function () {
             }
         });
 
-        router.get('devices/sender_id/1.0.0', function(ctx){
+        router.get('devices/sender_id', function(ctx){
             var result = device.getSenderId(ctx);
             print(result);
             response.status = 200;

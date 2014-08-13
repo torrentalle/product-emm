@@ -49,7 +49,7 @@ sso.acs(function(loggedInUser) {
         session.put("emmConsoleUser", userFeed);
         //var db = common.getDatabase();
 
-        var startupModule = require('/modules/startup.js').startup;
+        var startupModule = require('/modules/cloudstartup.js').startup;
         var startup = new startupModule(db);
         startup.onUserLogin(userFeed);
 

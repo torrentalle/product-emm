@@ -8,6 +8,7 @@
         keyStorePassword : dataConfi.ssoConfiguration.keyStorePassword,
         identityAlias : dataConfi.ssoConfiguration.identityAlias
       }
+
       sso.configure(dataConfi.ssoConfiguration.issuer, "emm", keyStoreParams, dataConfi.ssoConfiguration.identityProviderURL);
       sso.login();
     }else{

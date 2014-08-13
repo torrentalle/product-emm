@@ -351,14 +351,6 @@ var isDatabaseConfigured = function(){
 */
 var getDatabase = function(){
     var db = application.get(DB_SESSION);
-  	if(db){
-  		try{
-  			driver.query("SELECT 1 FROM dual");
-  		}catch(e){
-  			log.debug("New connection was taken");
-  			db = null;
-  		}
-  	}
     if(!db){
         try{
             db = new Database("WSO2_EMM_DB");
@@ -367,12 +359,8 @@ var getDatabase = function(){
             log.error(e);
         }
     }
-    
-   
-    
     return db;
 }
-
 /*
     An exception handling function capable of calling the called function 
     with the current

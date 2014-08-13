@@ -33,7 +33,7 @@
     "ssoConfiguration": {
         "enabled": true,
         "issuer": "emm",
-        "identityProviderURL": "%https.ip%/sso/samlsso.jag",
+        "identityProviderURL": "%https.ip%/samlsso",
         "keyStorePassword": "wso2carbon",
         "identityAlias": "wso2carbon",
         "responseSigningEnabled": "true",
@@ -69,7 +69,8 @@
         "username": "admin",
         "password": "admin",
         "apiVersion": "1.0.0",
-        "publisherServiceURL": "%https.ip%/productapipublisher",
-        "storeServiceURL": "%https.ip%/productapistore"
+        "publisherServiceURL": "https://10.10.10.123:9443/publisher",
+        "storeServiceURL": "https://10.10.10.123:9443/store",
+        "emmURL":"http://10.10.10.123:9765"
     }
 }

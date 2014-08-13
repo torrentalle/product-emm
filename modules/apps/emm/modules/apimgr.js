@@ -155,7 +155,7 @@ var apimgr = (function() {
                 allAPIs.push({name:"license", context:"/emm/api/devices/license", method:"GET", description:"Get license."});
                 allAPIs.push({name:"register", context:"/emm/api/devices/register", method:"POST", description:"Register device."});
                 allAPIs.push({name:"unregister", context:"/emm/api/devices/unregister", method:"POST", description:"Unregister device"});
-                allAPIs.push({name:"pendingOperations", context:"/emm/api/devices/pendingOperations", method:"GET", description:"Get pending operations."});
+                allAPIs.push({name:"pendingOperations", context:"/emm/api/notifications/pendingOperations", method:"POST", description:"pending operations."});
 
                 for(var i = 0; i < allAPIs.length; i++) {
                     this.publishAPIs(allAPIs[i], publisherServiceURL, cookie);
