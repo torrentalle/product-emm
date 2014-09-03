@@ -164,7 +164,6 @@
             <directory>src/repository/conf</directory>
             <outputDirectory>wso2emm-${pom.version}/repository/conf</outputDirectory>
             <includes>
-                <include>**/api-manager.xml</include>
                 <include>**/sso-idp-config.xml</include>
                 <include>**/emm-config.xml</include>
             </includes>
@@ -212,53 +211,12 @@
             </includes>
         </fileSet>
 	<fileSet>
-            <directory>src/repository/dbscripts/apimgt</directory>
-            <outputDirectory>wso2emm-${pom.version}/dbscripts/apimgt</outputDirectory>
-            <includes>
-                <include>*/**</include>
-            </includes>
-    </fileSet>
-	<fileSet>
             <directory>../p2-profile-gen/target/wso2carbon-core-${carbon.kernal.version}/dbscripts/service-provider</directory>
             <outputDirectory>wso2emm-${pom.version}/dbscripts/service-provider</outputDirectory>
             <includes>
                 <include>*/**</include>
             </includes>
     </fileSet>
-	<!-- API Store/ API Publisher -->
-	<fileSet>
-            <directory>../apps/productapipublisher/</directory>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/productapipublisher</outputDirectory>
-	    <!--excludes>
-		<exclude>**/site/themes/default/images/logo.png</exclude>
-		<exclude>**/site/themes/default/images/appFac_04.jpg</exclude>
-		<exclude>**/site/conf/site.json</exclude>
-		<exclude>**/site/themes/default/templates/footer/template.jag</exclude>
-		<exclude>**/site/themes/default/css/localstyles.css</exclude>
-		<exclude>publisherLogo/**</exclude>
-		<exclude>publisherTheme/**</exclude>
-		<exclude>publisherSite/**</exclude>
-		<exclude>footer/**</exclude>
-		<exclude>localstyles.css</exclude>
-	    </excludes-->
-        </fileSet>
-        <fileSet>
-             <directory>../apps/productapistore/</directory>
-             <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/productapistore</outputDirectory>
-	     <!--excludes>
-		<exclude>**/site/themes/fancy/images/logo.png</exclude>
-		<exclude>**/site/themes/fancy/images/appFac_04.jpg</exclude>
-		<exclude>**/site/conf/site.json</exclude>
-		<exclude>**/site/themes/fancy/css/styles-layout.css</exclude>
-		<exclude>**/site/themes/fancy/templates/page/base/template.jag</exclude>
-		<exclude>**/site/themes/fancy/templates/user/login/template.jag</exclude>
-		<exclude>storeLogo/**</exclude>
-		<exclude>storeSite/**</exclude>
-		<exclude>base-page/**</exclude>
-		<exclude>login/**</exclude>
-		<exclude>styles-layout.css</exclude>
-	    </excludes-->
-        </fileSet>
 	<fileSet>
             <directory>../p2-profile-gen/target/wso2carbon-core-${carbon.kernal.version}/repository/modules</directory>
             <outputDirectory>wso2emm-${pom.version}/modules/</outputDirectory>
@@ -470,18 +428,9 @@
             <fileMode>644</fileMode>
         </file>
         <file>
-            <source>src/repository/database/WSO2AM_DB.h2.db</source>
-            <outputDirectory>wso2emm-${pom.version}/repository/database</outputDirectory>
-            <fileMode>644</fileMode>
-        </file>
-        <file>
             <source>src/repository/database/WSO2IDENTITY_DB.h2.db</source>
             <outputDirectory>wso2emm-${pom.version}/repository/database</outputDirectory>
             <fileMode>644</fileMode>
-        </file>
-	   <file>
-            <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernal.version}/repository/database/WSO2AM_DB.h2.db</source>
-            <outputDirectory>wso2emm-${pom.version}/repository/database</outputDirectory>
         </file>
         <file>
             <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernal.version}/repository/conf/user-mgt.xml</source>
@@ -547,91 +496,6 @@
             <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernal.version}/repository/conf/etc/tasks-config.xml</source>
             <outputDirectory>wso2emm-${pom.version}/repository/conf/etc</outputDirectory>
         </file>
-
         <!-- End - nTask Component -->
-
-
-	<!--API Publisher Customization-->
-	<!--file>
-            <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernal.version}/repository/deployment/server/jaggeryapps/fakepublisher/publisherLogo/logo.png</source>
-            <outputDirectory>wso2emm-${pom.version}/repository/deployment/server/jaggeryapps/productapipublisher/site/themes/default/images</outputDirectory>
-	    <destName>logo.png</destName>
-	    <filtered>true</filtered>
-	    <fileMode>644</fileMode>
-        </file>
-	<file>
-            <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernal.version}/repository/deployment/server/jaggeryapps/fakepublisher/footer/template.jag</source>
-            <outputDirectory>wso2emm-${pom.version}/repository/deployment/server/jaggeryapps/productapipublisher/site/themes/default/templates/footer</outputDirectory>
-	    <destName>template.jag</destName>
-	    <filtered>true</filtered>
-	    <fileMode>644</fileMode>
-        </file>
-        <file>
-            <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernal.version}/repository/deployment/server/jaggeryapps/fakepublisher/localstyles.css</source>
-            <outputDirectory>wso2emm-${pom.version}/repository/deployment/server/jaggeryapps/productapipublisher/site/themes/default/css</outputDirectory>
-	    <destName>localstyles.css</destName>
-	    <filtered>true</filtered>
-	    <fileMode>644</fileMode>
-        </file>
-	<file>
-            <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernal.version}/repository/deployment/server/jaggeryapps/fakepublisher/publisherTheme/appFac_04.jpg</source>
-            <outputDirectory>wso2emm-${pom.version}/repository/deployment/server/jaggeryapps/productapipublisher/site/themes/default/images</outputDirectory>
-	    <destName>appFac_04.jpg</destName>
-	    <filtered>true</filtered>
-	    <fileMode>644</fileMode>
-        </file>
-	<file>
-            <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernal.version}/repository/deployment/server/jaggeryapps/fakepublisher/publisherSite/site.json</source>
-            <outputDirectory>wso2emm-${pom.version}/repository/deployment/server/jaggeryapps/productapipublisher/site/conf</outputDirectory>
-	    <destName>site.json</destName>
-	    <filtered>true</filtered>
-	    <fileMode>644</fileMode>
-        </file-->
-	<!--End API Publisher Customization-->
-	<!--API Store Customization-->
-	<!--file>
-            <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernal.version}/repository/deployment/server/jaggeryapps/fakestore/storeLogo/logo.png</source>
-            <outputDirectory>wso2emm-${pom.version}/repository/deployment/server/jaggeryapps/productapistore/site/themes/fancy/images</outputDirectory>
-	    <destName>logo.png</destName>
-	    <filtered>true</filtered>
-	    <fileMode>644</fileMode>
-        </file>
-	<file>
-            <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernal.version}/repository/deployment/server/jaggeryapps/fakepublisher/publisherTheme/appFac_04.jpg</source>
-            <outputDirectory>wso2emm-${pom.version}/repository/deployment/server/jaggeryapps/productapistore/site/themes/fancy/images</outputDirectory>
-	    <destName>appFac_04.jpg</destName>
-	    <filtered>true</filtered>
-	    <fileMode>644</fileMode>
-        </file>
-	<file>
-            <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernal.version}/repository/deployment/server/jaggeryapps/fakestore/storeSite/site.json</source>
-            <outputDirectory>wso2emm-${pom.version}/repository/deployment/server/jaggeryapps/productapistore/site/conf</outputDirectory>
-	    <destName>site.json</destName>
-	    <filtered>true</filtered>
-	    <fileMode>644</fileMode>
-        </file>
-	<file>
-            <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernal.version}/repository/deployment/server/jaggeryapps/fakestore/styles-layout.css</source>
-            <outputDirectory>wso2emm-${pom.version}/repository/deployment/server/jaggeryapps/productapistore/site/themes/fancy/css</outputDirectory>
-	    <destName>styles-layout.css</destName>
-	    <filtered>true</filtered>
-	    <fileMode>644</fileMode>
-        </file>
-	<file>
-            <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernal.version}/repository/deployment/server/jaggeryapps/fakestore/base-page/template.jag</source>
-            <outputDirectory>wso2emm-${pom.version}/repository/deployment/server/jaggeryapps/productapistore/site/themes/fancy/templates/page/base</outputDirectory>
-	    <destName>template.jag</destName>
-	    <filtered>true</filtered>
-	    <fileMode>644</fileMode>
-        </file>
-	<file>
-            <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernal.version}/repository/deployment/server/jaggeryapps/fakestore/login/template.jag</source>
-            <outputDirectory>wso2emm-${pom.version}/repository/deployment/server/jaggeryapps/productapistore/site/themes/fancy/templates/user/login</outputDirectory>
-	    <destName>template.jag</destName>
-	    <filtered>true</filtered>
-	    <fileMode>644</fileMode>
-        </file>
-        -->
-	<!--End API Store Customization-->
     </files>
 </assembly>

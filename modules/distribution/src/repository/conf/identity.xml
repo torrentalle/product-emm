@@ -30,7 +30,7 @@
     <JDBCPersistenceManager>
         <DataSource>
             <!-- Include a data source name (jndiConfigName) from the set of data sources defined in master-datasources.xml -->
-            <Name>jdbc/WSO2AM_DB</Name>
+            <Name>jdbc/WSO2CarbonDB</Name>
         </DataSource>
         <!-- If the identity database is created from another place and if it is required to skip schema initialization during the server start up, set the following
            property to "true". -->
@@ -114,7 +114,7 @@
             </SupportedGrantType>
             <SupportedGrantType>
                 <GrantTypeName>password</GrantTypeName>
-                <GrantTypeHandlerImplClass>org.wso2.carbon.apimgt.keymgt.handlers.ExtendedPasswordGrantHandler</GrantTypeHandlerImplClass>
+                <GrantTypeHandlerImplClass>org.wso2.carbon.identity.oauth2.token.handlers.grant.PasswordGrantHandler</GrantTypeHandlerImplClass>
             </SupportedGrantType>
             <SupportedGrantType>
                 <GrantTypeName>refresh_token</GrantTypeName>
@@ -130,7 +130,7 @@
             </SupportedGrantType>
         </SupportedGrantTypes>
         <OAuthCallbackHandlers>
-            <OAuthCallbackHandler Class="org.wso2.carbon.apimgt.keymgt.util.APIManagerOAuthCallbackHandler"/>
+            <OAuthCallbackHandler Class="org.wso2.carbon.identity.oauth.callback.DefaultCallbackHandler" />
         </OAuthCallbackHandlers>
 
         <!-- Add custom user headers to the response-->
