@@ -831,14 +831,7 @@ var user = (function () {
 
         /*authentication for devices only*/
         authenticate: function(ctx){
-            ctx.username = ctx.username;
-            log.debug("username " + ctx.username);
-            var username = ctx.username.split("@");
-            ctx.username = username[0] + '.' + username[1];
-            if (username.length == 3) {
-                ctx.username = ctx.username + '.' + username[2];
-            }
-
+            ctx.username = ctx.username.replace("@",".");
             log.debug("Modified username >>> " + ctx.username);
             try {
                 var authStatus = server().authenticate(ctx.username, ctx.password);
