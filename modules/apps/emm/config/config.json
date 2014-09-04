@@ -55,15 +55,15 @@
         "archieve_location_android": "%http.ip%"
     },
     "registry": {
-        "oauthClientKey" : "/_system/config/emm/OAuthClientKey",
-        "iOSMDMCertificate" : "/_system/config/emm/MDMCert.pfx",
-        "iOSAppCertificate" : "/_system/config/emm/WSO2Agent.pfx",
-        "scepConfiguration" : "/_system/config/emm/SCEPConfig",
-        "androidGCMKeys" : "/_system/config/emm/AndroidGCM",
-        "tenantLicense" : "/_system/config/emm/TenantLicense",
-        "copyright" : "/_system/config/emm/Copyright",
-        "emailConfiguration" : "/_system/config/emm/EmailConfig",
-        "monitorConfiguration" : "/_system/config/emm/MonitorConfig"
+        "oauthClientKey" : "/_system/governance/emm/OAuthClientKey",
+        "iOSMDMCertificate" : "/_system/governance/emm/MDMCert.pfx",
+        "iOSAppCertificate" : "/_system/governance/emm/WSO2Agent.pfx",
+        "scepConfiguration" : "/_system/governance/emm/SCEPConfig",
+        "androidGCMKeys" : "/_system/governance/emm/AndroidGCM",
+        "tenantLicense" : "/_system/governance/emm/TenantLicense",
+        "copyright" : "/_system/governance/emm/Copyright",
+        "emailConfiguration" : "/_system/governance/emm/EmailConfig",
+        "monitorConfiguration" : "/_system/governance/emm/MonitorConfig"
     },
     "apiManagerConfigurations": {
         "username": "admin",
