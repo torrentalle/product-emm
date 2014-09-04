@@ -29,7 +29,18 @@
 		
 		<!-- post url for device tokens -->
 		<TokenURL>http://192.168.1.2:9763/emm/api/devices/iostokenregister</TokenURL>
-		
+
+        <!-- MDM Profile signing certificate -->
+        <!--
+        <MDMProfileCertificate>
+            <Location>${carbon.home}/repository/resources/security/wso2carbon.jks</Location>
+            <Type>JKS</Type>
+            <Password>wso2carbon</Password>
+            <KeyAlias>wso2carbon</KeyAlias>
+            <KeyPassword>wso2carbon</KeyPassword>
+        </MDMProfileCertificate>
+        -->
+
 		<EmmKeystore>		
 			<!-- EMM Keystore file location-->
             <EMMKeystoreLocation>${carbon.home}/repository/resources/security/wso2emm.jks</EMMKeystoreLocation>
