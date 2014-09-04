@@ -1,0 +1,31 @@
+<%
+    function readDate(workingDir, 
+	            ca_country, ca_state,ca_loc, ca_org, ca_org_unit,ca_exp, ca_cn, 
+	            ra_country, ra_state,ra_loc, ra_org, ra_org_unit,ra_exp, ra_cn,
+	            ssl_country, ssl_state,ssl_loc, ssl_org, ssl_org_unit,ssl_exp, ssl_server,
+	            ssl_tspw, name, com, zipPath)
+    {
+    
+        var jsonString = '{"workingDir":"'+workingDir+'","countryCA":"'+ca_country+'", "stateCA":"'+ca_state+'",'+
+		    '"localityCA":"'+ca_loc+'", "organizationCA":"'+ca_org+'", "organizationUCA":"'+ca_org_unit+'",'+
+		    '"daysCA":"'+ca_exp+'", "commonNameCA":"'+ca_cn+'",'+
+							
+		    '"countryRA":"'+ra_country+'", "stateRA":"'+ra_state+'",'+
+		    '"localityRA":"'+ra_loc+'", "organizationRA":"'+ra_org+'", "organizationURA":"'+ra_org_unit+'",'+
+		    '"daysRA":"'+ra_exp+'", "commonNameRA":"'+ra_cn+'",'+
+							
+		    '"countrySSL":"'+ssl_country+'", "stateSSL":"'+ssl_state+'",'+
+		    '"localitySSL":"'+ssl_loc+'", "organizationSSL":"'+ssl_org+'", "organizationUSSL":"'+ssl_org_unit+'",'+
+                    '"daysSSL":"'+ssl_exp+'", "serverIp":"'+ssl_server+'",'+
+							
+							
+		    '"password":"'+ssl_tspw+'",'+
+		    '"usersname":"'+name+'","company":"'+com+'","zipPath":"'+zipPath+'"}';
+	var log = new Log();
+	log.info(jsonString);
+                    
+        var jsonObj = parse(jsonString);
+        
+        return jsonString;
+    }
+%>

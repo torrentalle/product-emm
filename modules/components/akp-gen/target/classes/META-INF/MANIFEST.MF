@@ -1,0 +1,32 @@
+Manifest-Version: 1.0
+Export-Package: org.wso2.apkgenerator.generators;uses:="org.wso2.apkge
+ nerator.util,org.apache.maven.shared.invoker,org.bouncycastle.jce.pro
+ vider,org.bouncycastle.cert.jcajce,javax.security.auth.x500,org.wso2.
+ apkgenerator.data,org.bouncycastle.cert,org.bouncycastle.operator.jca
+ jce,org.bouncycastle.asn1,org.bouncycastle.asn1.x509,org.bouncycastle
+ .operator";version="1.1.0",org.wso2.apkgenerator.util;uses:="org.boun
+ cycastle.openssl";version="1.1.0",org.wso2.apkgenerator.data;uses:="o
+ rg.wso2.apkgenerator.util,org.json";version="1.1.0"
+Built-By: inoshp
+Tool: Bnd-1.43.0
+Bundle-Name: org.wso2.apkgenerator
+Created-By: Apache Maven Bundle Plugin
+Build-Jdk: 1.7.0_07
+Bundle-Version: 1.1.0
+Bnd-LastModified: 1409816695332
+Bundle-ManifestVersion: 2
+Bundle-License: http://www.apache.org/licenses/LICENSE-2.0
+Bundle-Description: WSO2 Enterprise Mobility Manager (EMM)
+Import-Package: javax.security.auth.x500;resolution:=optional,org.apac
+ he.maven.shared.invoker;resolution:=optional;version="[2.0,3)",org.bo
+ uncycastle.asn1;resolution:=optional;version="[1.49,2)",org.bouncycas
+ tle.asn1.x509;resolution:=optional;version="[1.49,2)",org.bouncycastl
+ e.cert;resolution:=optional;version="[1.49,2)",org.bouncycastle.cert.
+ jcajce;resolution:=optional;version="[1.49,2)",org.bouncycastle.jce.p
+ rovider;resolution:=optional;version="[1.49,2)",org.bouncycastle.open
+ ssl;resolution:=optional;version="[1.49,2)",org.bouncycastle.operator
+ ;resolution:=optional;version="[1.49,2)",org.bouncycastle.operator.jc
+ ajce;resolution:=optional;version="[1.49,2)",org.json;resolution:=opt
+ ional,org.osgi.framework;version="[1.7,2)"
+Bundle-SymbolicName: org.wso2.apkgenerator
+

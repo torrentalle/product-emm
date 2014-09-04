@@ -1,0 +1,54 @@
+<%
+    include("data.jag");
+    
+    if (request.getParameter("action")== "call_jar")
+        {
+	    var process = require("process");
+            var workingDir = process.getProperty('carbon.home')+'/repository/deployment/server/jaggeryapps/Auto_Generator/tmp/'; 
+	    var zipPath = process.getProperty('carbon.home');
+	    
+            var ca_country = request.getParameter("ca_country");
+            var ca_state = request.getParameter("ca_state");
+            var ca_loc = request.getParameter("ca_loc");
+            var ca_org = request.getParameter("ca_org");
+            var ca_org_unit = request.getParameter("ca_org_unit");
+            var ca_exp = request.getParameter("ca_exp");
+            var ca_cn = request.getParameter("ca_cn");
+	    
+	    var ra_country = request.getParameter("ra_country");
+            var ra_state = request.getParameter("ra_state");
+            var ra_loc = request.getParameter("ra_loc");
+            var ra_org = request.getParameter("ra_org");
+            var ra_org_unit = request.getParameter("ra_org_unit");
+            var ra_exp = request.getParameter("ra_exp");
+            var ra_cn = request.getParameter("ra_cn");
+	    
+	    var ssl_country = request.getParameter("ssl_country");
+            var ssl_state = request.getParameter("ssl_state");
+            var ssl_loc = request.getParameter("ssl_loc");
+            var ssl_org = request.getParameter("ssl_org");
+            var ssl_org_unit = request.getParameter("ssl_org_unit");
+            var ssl_exp = request.getParameter("ssl_exp");
+	    
+            var ssl_server = request.getParameter("ssl_server");
+            var ssl_tspw = request.getParameter("ssl_tspw");
+            var name = request.getParameter("name");
+	    var com = request.getParameter("company");
+	    
+	    var apk_gen = new Packages.org.wso2.apkgenerator.generators.Invoker;
+            		
+	    var jsonObj = readDate(workingDir, 
+	                          ca_country, ca_state,ca_loc, ca_org, ca_org_unit,ca_exp, ca_cn, 
+	                          ra_country, ra_state,ra_loc, ra_org, ra_org_unit,ra_exp, ra_cn,
+	                          ssl_country, ssl_state,ssl_loc, ssl_org, ssl_org_unit,ssl_exp, ssl_server,
+	                          ssl_tspw, name, com, zipPath);
+				  
+	    var path = apk_gen.generateApk(jsonObj);
+				  
+	    print(path);
+	    
+	  
+        
+	
+    }
+%>

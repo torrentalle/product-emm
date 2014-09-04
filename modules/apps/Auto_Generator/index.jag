@@ -1,0 +1,571 @@
+
+<!DOCTYPE html>
+	
+<html>
+
+	<head>
+		<title>EMM Configuration Wizard</title>
+
+		<script src="http://cdn.jquerytools.org/1.2.7/full/jquery.tools.min.js"></script>
+		<script src="js/jquery.percentageloader-0.1.js"></script>
+		<script src="js/jquery.percentageloader-0.1.min.js"></script>
+	        <link rel="shortcut icon" href="img/favicon.ico">
+		<link rel="stylesheet" type="text/css" href="css/standalone.css"/>
+		<link rel="stylesheet" type="text/css" href="css/scrollable-wizard.css"/>
+		<link rel="stylesheet" type="text/css" href="css/jquery.percentageloader-0.1.css"/>
+	</head>
+	
+	<body>
+
+		
+		<div id="drawer" > <!-- Drawer for error empty strings-->
+		<var id="message"></var>
+		<samp style="color:red"></samp>
+		</div>
+				
+		<script>document.getElementById("download").disabled=true;</script>
+
+		<form action="#">
+			<div id="wizard">
+				<ul id="status">
+					<li class="active"><strong>1.</strong> User Details</li>
+					<li><strong>2.</strong> CA Certificate Details</li>
+					<li><strong>3.</strong> RA Certificate Details</li>
+					<li><strong>4.</strong> SSL Certificate Details</li>
+					<li><strong>5.</strong> Successful</li>
+				</ul>
+
+					 <div class="items">
+
+      <!-- End user details -->
+						<div class="page">
+
+							<h2>
+								<strong>Step 1: </strong> End user details
+								<em>Please enter your details:</em>
+							</h2>
+
+							<ul>
+	 
+								<li class="required">
+									<label>
+									<strong>1.</strong> Your Name <span>*</span><br />
+									<input type="text" class="text" name="name_usr" value="Kasun" id="name_usr"/>
+									</label>
+								</li>
+
+	  
+								<li class="required">
+									<label>
+									<strong>2.</strong> Your Company Name  <span>*</span><br />
+									<input type="text" class="text" name="com_name" value="WSO2"/>
+									</label>
+								</li>
+
+								<li class="clearfix">
+									<button type="button" class="next right">Proceed &raquo;</button>
+								</li>
+							</ul>
+
+						</div>
+
+      <!-- CA details -->
+						<div class="page">
+
+							<h2>
+								<strong>Step 2: </strong> CA Certificate Details <b></b>
+								<em>Please enter Certification Authority Details:</em>
+							</h2>
+
+							<ul>
+	  
+							<li class="required double">
+								<label>
+								<strong>1.</strong>Country<span>*</span><br />
+								<input type="text" class="text" name="ca_country" value="SL"/>
+								
+								</label>
+							
+							
+							
+								<label>
+								<strong>2.</strong>State<span>*</span><br />
+								<input type="text" class="text" name="ca_state" value="WP"/>
+								
+								</label>
+							</li>
+							
+							
+							
+							<li class="required double">
+								<label>
+								<strong>3.</strong>Locality<span>*</span><br />
+								<input type="text" class="text" name="ca_loc" value="Colombo"/>
+								
+								</label>
+							
+								<label>
+								<strong>4.</strong>Organization<span>*</span><br />
+								<input type="text" class="text" name="ca_org" value="WSO2"/>
+								
+								</label>
+							</li>
+							
+							<li class="required double">
+								<label>
+								<strong>5.</strong>Organizational Unit<span>*</span><br />
+								<input type="text" class="text" name="ca_org_unit" value="Mobile"/>
+								
+								</label>
+							
+								<label>
+								<strong>6.</strong>Common Name<span>*</span><br />
+								<input type="text" class="text" name="ca_cn" value="kasun" id="ca_cn"/>
+								
+								</label>
+							</li>
+							
+							<li class="required">
+								<label>
+								<strong>7.</strong>Valid Days<span>*</span><br />
+								<input type="number" class="text" name="ca_exp"   pattern="\d+" required="valid days should be a number" value="365" id="ca_exp"/>
+								
+								</label>
+							</li>
+
+							<li class="clearfix">
+								<button type="button" class="prev" style="float:left">
+								&laquo; Back
+								</button>
+								<button type="button" class="next right">
+								Proceed &raquo;
+								</button>
+							</li>
+
+							<br clear="all" />
+						</ul>
+
+					</div>
+
+      <!-- RA Details -->
+					<div class="page">
+
+							<h2>
+								<strong>Step 3: </strong> RA Certificate Details <b></b>
+								<em>Please enter Registration Authority Details:</em>
+							</h2>
+
+							<ul>
+	  
+							<li class="required double">
+								<label>
+								<strong>1.</strong>Country<span>*</span><br />
+								<input type="text" class="text" name="ra_country" />
+								
+								</label>
+							
+								<label>
+								<strong>2.</strong>State<span>*</span><br />
+								<input type="text" class="text" name="ra_state" />
+								
+								</label>
+							</li>
+							
+							<li class="required double">
+								<label>
+								<strong>3.</strong>Locality<span>*</span><br />
+								<input type="text" class="text" name="ra_loc" />
+								
+								</label>
+							
+								<label>
+								<strong>4.</strong>Organization<span>*</span><br />
+								<input type="text" class="text" name="ra_org" />
+								
+								</label>
+							</li>
+							
+							<li class="required double">
+								<label>
+								<strong>5.</strong>Organizational Unit<span>*</span><br />
+								<input type="text" class="text" name="ra_org_unit" />
+								
+								</label>
+							
+								<label>
+								<strong>6.</strong>Common Name<span>*</span><br />
+								<input type="text" class="text" name="ra_cn" id="ra_cn"/>
+								
+								</label>
+							</li>
+							
+							<li>							
+								<label>
+									<input type="checkbox" type="checkbox" name="ca_same" onclick="same_ca(this.form)">Use CA Details</input>	
+								</label>
+							</li>
+							
+							<li class="required">
+								<label>
+								<strong>7.</strong>Valid Days<span>*</span><br />
+								<input  class="text" name="ra_exp" type="number" min="0"  pattern="\d+" required="Valid days should be a number" id="ra_exp"/>
+								
+								</label>
+							</li>
+
+							<li class="clearfix">
+								<button type="button" class="prev" style="float:left">
+								&laquo; Back
+								</button>
+								<button type="button" class="next right">
+								Proceed &raquo;
+								</button>
+							</li>
+
+							<br clear="all" />
+						</ul>
+
+					</div>
+					 
+	<!--SSL Details -->
+					<div class="page">
+
+							<h2>
+								<strong>Step 4: </strong> SSL Certificate Details <b></b>
+								<em>Please enter Secure Socket Layer Details:</em>
+							</h2>
+
+							<ul>
+	  
+							<li class="required double">
+								<label>
+								<strong>1.</strong>Country<span>*</span><br />
+								<input type="text" class="text" name="ssl_country" />
+								
+								</label>
+							
+								<label>
+								<strong>2.</strong>State<span>*</span><br />
+								<input type="text" class="text" name="ssl_state" />
+								
+								</label>
+							</li>
+							
+							<li class="required double">
+								<label>
+								<strong>3.</strong>Locality<span>*</span><br />
+								<input type="text" class="text" name="ssl_loc" />
+								
+								</label>
+							
+								<label>
+								<strong>4.</strong>Organization<span>*</span><br />
+								<input type="text" class="text" name="ssl_org" />
+							
+								</label>
+							</li>
+							
+							<li class="required double">
+								<label>
+								<strong>5.</strong>Organizational Unit<span>*</span><br />
+								<input type="text" class="text" name="ssl_org_unit" />
+								
+								</label>
+							
+								<label>
+								<strong>6.</strong>Server hostname/ipaddress<span>*</span><br />
+								<input type="text" class="text" name="ssl_server" id="ssl_server"/>
+								
+								</label>
+							</li>
+							
+							<li>							
+								<label>
+									<input type="checkbox" type="checkbox" name="ra_same" onclick="same_ra(this.form)">Use RA Details</input>	
+								</label>
+							</li>
+							
+							<li class="required double">
+								<label>
+								<strong>7.</strong>Valid Days<span>*</span><br />
+								<input  class="text" name="ssl_exp" type="number" min="0"  pattern="\d+" required="valid days should be a number" id="ssl_exp"/>
+								
+								</label>
+							
+							<h2>
+								<strong></strong> Android Client <b></b>
+								
+							</h2>
+							
+								<label>
+								<strong>8.</strong>TRUSTORE PASSWORD<span>*</span><br />
+								<input type="password" class="text" name="ssl_tspw" />
+								
+								</label>
+							</li>
+
+							<li class="clearfix">
+								<button type="button" class="prev" style="float:left">
+								&laquo; Back
+								</button>
+								<button type="button" class="next right">
+								Submit &raquo;
+								</button>
+							</li>
+
+							<br clear="all" />
+						</ul>
+
+					</div>
+			
+					<div class="page">
+												
+						<li class="clearfix">
+							<button type="button" class="prev" id ="prevv" onclick="disabling('download')">
+								&laquo; Back
+							</button>
+							<button type="button"  id="animate"
+							onclick="callable_jar(this.form)">
+								Generate &raquo;
+							</button>
+							<div id="progressBar" style="visibility: hidden;">
+							<img src="img/progress.gif" style="height: 20px;">
+                            Please Hang on, This may take 1-2 minutes
+                            </div>
+                             <div id="successTips"  style="visibility: hidden;">
+
+						 <h2>Apk and certificate creation success!!!</h2>
+						 Please find your apk and certificates in <b>[EMM_HOME]/Apk</b>> folder
+						 <br>
+						 <h3>How to proceed?</h3>
+						 *  Install the apk on your device<br>
+						 *  Copy the jks files to [EMM_HOME]/repository/resources/security and replace the files.
+						 *  Start the server and register with your device, That's it!
+
+
+
+					</div>
+						</li>
+							
+					</div>
+
+
+		</form>
+
+		<script>
+			
+			$(function() {
+				var root = $("#wizard").scrollable();
+				var api = root.scrollable(), drawer = $("#drawer"), drawer_ipvalid = $("#drawer_ipvalid");
+				
+				
+				api.onBeforeSeek(function(event, i) {
+
+				if (api.getIndex() < i) {
+					
+					// 1. get current page
+					var page = root.find(".page").eq(api.getIndex()),
+
+					// 2. .. and all required fields inside the page
+					inputs = page.find(".required :input").removeClass("error"),
+					
+					// 3. .. which are empty
+					empty = inputs.filter(function() {
+						return $(this).val().replace(/\s*/g, '') == '';
+					});
+					
+
+					// if there are empty fields, then
+					if (empty.length) {
+
+					// slide down the drawer
+					drawer.slideDown(function()  {
+
+					// colored flash effect
+						drawer.css("backgroundColor", "#229");
+						var name = "Please fill values for"
+						$("#message").text(name);
+						setTimeout(function() { drawer.css("backgroundColor", "#fff"); }, 1000);
+					});
+
+						 // add a CSS class name "error" for empty & required fields
+						empty.addClass("error");
+
+						// cancel seeking of the scrollable by returning false
+						return false;
+
+						// everything is good
+					}
+					
+					else if (i==4&&document.getElementById("ssl_server").value.localeCompare("")==1) {
+						if (ValidateIPaddress(document.getElementById("ssl_server"))) {
+							//code
+						
+							// slide down the drawer
+							drawer.slideDown(function()  {
+
+							// colored flash effect
+								drawer.css("backgroundColor", "#229");
+								var name = "Invalid IP/Hostname"
+								$("#message").text(name);
+								setTimeout(function() { drawer.css("backgroundColor", "#fff"); }, 1000);
+							});
+
+							return false;
+						
+						}
+						else {
+							drawer.slideUp();
+						}
+					}
+					
+					else if (i==4&&document.getElementById("ssl_server").value.localeCompare("")==1) {
+						if (NotSameInput(document.getElementById("ca_cn"),document.getElementById("ssl_server"))||
+						    NotSameInput(document.getElementById("ra_cn"),document.getElementById("ssl_server"))) {
+							//code
+						
+							// slide down the drawer
+							drawer.slideDown(function()  {
+
+							// colored flash effect
+								drawer.css("backgroundColor", "#229");
+								var name = "SSL Server IP/Hostname cannot be same as RA or CA Common Names"
+								$("#message").text(name);
+								setTimeout(function() { drawer.css("backgroundColor", "#fff"); }, 1000);
+							});
+
+							return false;
+						
+						}
+						else {
+							drawer.slideUp();
+						}
+					}
+				
+					else {
+
+						// hide the drawer
+						drawer.slideUp();
+					}
+
+				}
+
+				// update status bar
+				$("#status li").removeClass("active").eq(i).addClass("active");
+
+				});
+                         
+                             // if tab is pressed on the next button seek to next page
+				root.find("button.next").keydown(function(e) {
+					if (e.keyCode == 9) {
+
+					// seeks to next tab by executing our validation routine
+						api.next();
+						e.preventDefault();
+					}
+				});
+			});
+			
+  
+		</script>
+		<script src="js/validation.js"></script>
+		<!--<script src="js/ProgressCircle.js"></script>
+		<script src="js/ProgressCircle.min.js"></script>
+		<script src="js/pro.js"></script>-->
+		<script src="be.jag"></script>
+		<script>
+			
+			function callable_jar(id) {
+				console.log("sasdas");
+				document.getElementById("progressBar").style.visibility='visible';
+				document.getElementById("successTips").style.visibility='hidden';
+				document.getElementById("animate").disabled=true;
+				document.getElementById("prevv").disabled=true;
+				$.get("backend.jag", {  ca_country:id.ca_country.value, ca_state:id.ca_state.value,
+							ca_loc:id.ca_loc.value, ca_org:id.ca_org.value, ca_org_unit:id.ca_org_unit.value,
+							ca_exp:id.ca_exp.value, ca_cn:id.ca_cn.value,
+							
+							ra_country:id.ra_country.value, ra_state:id.ra_state.value,
+							ra_loc:id.ra_loc.value, ra_org:id.ra_org.value, ra_org_unit:id.ra_org_unit.value,
+							ra_exp:id.ra_exp.value, ra_cn:id.ra_cn.value,
+							
+							ssl_country:id.ssl_country.value, ssl_state:id.ssl_state.value,
+							ssl_loc:id.ssl_loc.value, ssl_org:id.ssl_org.value, ssl_org_unit:id.ssl_org_unit.value,
+							ssl_exp:id.ssl_exp.value, ssl_server:id.ssl_server.value,
+							
+							
+							ssl_tspw:id.ssl_tspw.value,
+							name:id.name_usr.value,company:id.com_name.value ,action: "call_jar" },
+							
+					
+				function(data){
+					document.getElementById("progressBar").style.visibility='hidden';
+					document.getElementById("successTips").style.visibility='visible';
+					document.getElementById("animate").disabled=false;
+					document.getElementById("prevv").disabled=false;
+					var zipPth = data;
+					console.log("end"+zipPth);
+					/*
+					var http = require("http"),
+					url = require("url"),
+					path = require("path"),
+					fs = require("fs")
+					port = process.argv[2] || 8888;
+ 
+					http.createServer(function(request, response) {
+ 
+					var uri = url.parse(request.url).pathname
+						, filename = path.join(process.cwd(), uri);
+  
+					path.exists(filename, function(exists) {
+					if(!exists) {
+						response.writeHead(404, {"Content-Type": "text/plain"});
+						response.write("404 Not Found\n");
+						response.end();
+						return;
+					}
+ 
+					if (fs.statSync(filename).isDirectory()) filename += zipPth;
+ 
+					fs.readFile(filename, "binary", function(err, file) {
+					if(err) {        
+						response.writeHead(500, {"Content-Type": "text/plain"});
+						response.write(err + "\n");
+						response.end();
+						return;
+					}
+ 
+						response.writeHead(200);
+						response.write(file, "binary");
+						response.end();
+					});
+					});
+					}).listen(parseInt(port, 10));
+ 
+					console.log("Static file server running at\n  => http://localhost:" + port + "/\nCTRL + C to shutdown");
+					*/
+				});
+				
+			}
+			
+			
+			function disabling(id)
+			{
+				document.getElementById(id).disabled=true;
+			}
+			
+			function redirect()
+			{
+				window.location=zipPth;
+			}
+			
+			
+			
+			
+			
+			
+		</script>
+		
+		
+	</body>
+</html>

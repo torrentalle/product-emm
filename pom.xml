@@ -68,6 +68,7 @@
 		<module>modules/components/emm-task</module>
 		<module>modules/components/emm-gcm</module>
 		<module>modules/components/emm-utils</module>
+        <module>modules/components/akp-gen</module>
 		<module>modules/features</module>
 		<module>modules/p2-profile-gen</module>
 		<module>modules/distribution</module>
@@ -140,6 +141,7 @@
 		<jackson.version>2.1.4</jackson.version>
 		<jcip.annotations.version>1.0.wso2v1</jcip.annotations.version>
 		<slf4j.version>1.7.7</slf4j.version>
+        <maven.invoker.version>2.0.11.wso2v1</maven.invoker.version>
 	</properties>
 
 </project>
