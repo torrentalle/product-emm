@@ -83,7 +83,13 @@ var apimgr = (function () {
             headers.Cookie = cookie;
 
             var url = serviceURL + ADD_API_ENDPOINT;
-            post(url, params, headers, null);
+            var result = post(url, params, headers, null);
+            result = parse(result.data);
+            if ((result!=null) && !result.error) {
+                return true;
+            } else {
+                return false;
+            }
         },
         promote: function (apiInfo, serviceURL, cookie, provider) {
             var params = {};
@@ -98,7 +104,13 @@ var apimgr = (function () {
             var headers = {};
             headers.Cookie = cookie;
             var url = serviceURL + API_STATE_CHANGE_ENDPOINT;
-            post(url, params, headers, null);
+            var result = post(url, params, headers, null);
+            result = parse(result.data);
+            if ((result!=null) && !result.error) {
+                return true;
+            } else {
+                return false;
+            }
         },
         addApplication: function (appInfo, serviceURL, cookie) {
             var params = {};
@@ -111,10 +123,11 @@ var apimgr = (function () {
             headers.Cookie = cookie;
             var url = serviceURL + ADD_APPLICATION_ENDPOINT;
             var result = post(url, params, headers, null);
-            if (result.error) {
-                return false;
-            } else {
+            result = parse(result.data);
+            if ((result!=null) && !result.error) {
                 return true;
+            } else {
+                return false;
             }
         },
         addSubscription: function (apiInfo, serviceURL, cookie, provider, appId) {
@@ -132,6 +145,12 @@ var apimgr = (function () {
 
             var url = serviceURL + ADD_SUBSCRIPTION_ENDPOINT;
             var result = post(url, params, headers, null);
+            result = parse(result.data);
+            if ((result!=null) && !result.error) {
+                return true;
+            } else {
+                return false;
+            }
         },
         generateApplicationKey: function (keytype, serviceURL, cookie, appName) {
 
@@ -148,8 +167,12 @@ var apimgr = (function () {
 
             var url = serviceURL + ADD_SUBSCRIPTION_ENDPOINT;
             var result = post(url, params, headers, null);
-
-            return result;
+            result = parse(result.data);
+            if ((result!=null) && !result.error) {
+                return true;
+            } else {
+                return false;
+            }
         },
         getConsumerKeyPair: function (serviceURL, cookie) {
 
@@ -176,43 +199,70 @@ var apimgr = (function () {
             var appName = tenantInfo.domain;
             var appDescription = "API subscription app for tenant " + tenantInfo.domain;
             var cookie = this.login(storeServiceURL);
-            this.addApplication({"name": appName, "description": appDescription}, storeServiceURL, cookie);
-            log.info("Added application "+appName+" for API subscription");
-            var allAPIs = dataConfig.apiManagerConfigurations.deviceAPIs;
-            for (var i = 0; i < allAPIs.length; i++) {
-                this.addSubscription(allAPIs[i], storeServiceURL, cookie,
-                    dataConfig.apiManagerConfigurations.username, appName);
-            }
-
-            this.generateApplicationKey(PROD_APPLICATION_KEY_TYPE, storeServiceURL, cookie, appName);
-            var result = this.getConsumerKeyPair(storeServiceURL, cookie);
-            if (result != null) {
-                var data = result.data;
-                data = parse(data);
-                if (data != null) {
-                    var subscriptions = data["subscriptions"];
-                    if (subscriptions != null && subscriptions != undefined && subscriptions.length > 0) {
-                        var subscription = subscriptions[0];
-                        var properties = {};
-                        properties.prodConsumerKey = subscription[PROD_CONSUMER_KEY_PROP];
-                        properties.prodConsumerSecret = subscription[PROD_CONSUMER_SECRET_PROP];
-                        properties.sandboxConsumerKey = subscription[SANDBOX_CONSUMER_KEY_PROP];
-                        properties.sandboxConsumerSecret = subscription[SANDBOX_CONSUMER_SECRET_PROP];
-                        return properties;
+            if(cookie!=null){
+                log.debug("Logged into API cloud");
+                if(this.addApplication({"name": appName, "description": appDescription},
+                    storeServiceURL, cookie)){
+                    log.debug("Added application " + appName + " for API subscription");
+                    var allAPIs = dataConfig.apiManagerConfigurations.deviceAPIs;
+                    for (var i = 0; i < allAPIs.length; i++) {
+                        if(!this.addSubscription(allAPIs[i], storeServiceURL, cookie,
+                            dataConfig.apiManagerConfigurations.username, appName)){
+                            log.error("Unable to subscribe to API : " + allAPIs[i].name);
+                        }
                     }
+                    if(this.generateApplicationKey(PROD_APPLICATION_KEY_TYPE, storeServiceURL,
+                        cookie, appName)){
+                        log.debug("Generated Application keys for the application : " + appName);
+                        var result = this.getConsumerKeyPair(storeServiceURL, cookie);
+                        if (result != null) {
+                            var data = result.data;
+                            data = parse(data);
+                            if (data != null) {
+                                var subscriptions = data["subscriptions"];
+                                if (subscriptions != null && subscriptions != undefined &&
+                                    subscriptions.length > 0) {
+                                    var subscription = subscriptions[0];
+                                    var properties = {};
+                                    properties.prodConsumerKey = subscription[PROD_CONSUMER_KEY_PROP];
+                                    properties.prodConsumerSecret = subscription[PROD_CONSUMER_SECRET_PROP];
+                                    properties.sandboxConsumerKey = subscription[SANDBOX_CONSUMER_KEY_PROP];
+                                    properties.sandboxConsumerSecret = subscription[SANDBOX_CONSUMER_SECRET_PROP];
+                                    return properties;
+                                }
+                            }
+                        }
+                    }else{
+                        log.error("Unable to generate Application keys.");
+                    }
+                }else{
+                    log.error("Unable to add application.");
                 }
+            }else{
+                log.error("Unable to login to API Cloud. Could not subscribe to EMM APIs.");
             }
         },
         publishEMMAPIs: function () {
             var publisherServiceURL = dataConfig.apiManagerConfigurations.publisherServiceURL;
             var cookie = this.login(publisherServiceURL);
-            var allAPIs = dataConfig.apiManagerConfigurations.deviceAPIs;
-            for (var i = 0; i < allAPIs.length; i++) {
-                this.publishAPI(allAPIs[i], publisherServiceURL, cookie);
-                this.promote(allAPIs[i], publisherServiceURL, cookie, dataConfig.apiManagerConfigurations.username);
+            if (cookie != null) {
+                var allAPIs = dataConfig.apiManagerConfigurations.deviceAPIs;
+                for (var i = 0; i < allAPIs.length; i++) {
+                    if(this.publishAPI(allAPIs[i], publisherServiceURL, cookie)){
+                        if(!this.promote(allAPIs[i], publisherServiceURL, cookie,
+                            dataConfig.apiManagerConfigurations.username)){
+                            log.error("Unable promote API " + allAPIs[i].name
+                                +" to Published state. Please try promoting manually.");
+                        }
+                    }else{
+                        log.error("Unable publish API " + allAPIs[i].name +" to API Cloud.");
+                        return;
+                    }
+                }
+            }else{
+                log.error("Unable to login to API Cloud. Could not publish EMM APIs.");
             }
         }
-    }
-
+    };
     return module;
 })();

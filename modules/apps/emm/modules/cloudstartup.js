@@ -33,7 +33,9 @@ var startup = (function () {
                     var properties = apiMgr.initAPISubscription(tenantInfo);
                     log.debug("API consumer keys " + stringify(properties));
                     if (properties.prodConsumerKey && properties.prodConsumerSecret) {
-                        user.saveOAuthClientKey(parseInt(ctx.tenantId), properties.prodConsumerKey, properties.prodConsumerSecret);
+                        user.saveOAuthClientKey(parseInt(ctx.tenantId), properties.prodConsumerKey,
+                            properties.prodConsumerSecret);
+                        log.debug("Saved API consumer keys in Registry");
                     } else {
                         log.error("Error in getting Consumer key & secret.");
                     }
