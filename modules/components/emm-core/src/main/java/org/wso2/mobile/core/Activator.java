@@ -15,7 +15,7 @@
  */
 
 
-package org.wso2.mobile.utils;
+package org.wso2.mobile.core;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
