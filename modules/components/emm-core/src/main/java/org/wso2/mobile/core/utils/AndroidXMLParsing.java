@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.wso2.mobile.utils.utilities;
+package org.wso2.mobile.core.utils;
 
 public class AndroidXMLParsing {
     /**

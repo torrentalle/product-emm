@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.wso2.mobile.utils.utilities;
+package org.wso2.mobile.core.utils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -38,15 +38,22 @@ import com.dd.plist.NSDictionary;
 public class ZipFileReading {
 	
 	//ios CF Bundle keys
-	public static final String IPA_BUNDLE_VERSION_KEY = "CFBundleVersion";
-	public static final String IPA_BUNDLE_NAME_KEY = "CFBundleName";
-	public static final String IPA_BUNDLE_IDENTIFIER_KEY = "CFBundleIdentifier";
+	private static final String IPA_BUNDLE_VERSION_KEY = "CFBundleVersion";
+	private static final String IPA_BUNDLE_NAME_KEY = "CFBundleName";
+	private static final String IPA_BUNDLE_IDENTIFIER_KEY = "CFBundleIdentifier";
 	
 	//Android attributes
-	public static final String APK_VERSION_KEY = "versionName";
-	public static final String APK_PACKAGE_KEY = "package";
-	
-    public static Document loadXMLFromString(String xml) throws Exception {
+	private static final String APK_VERSION_KEY = "versionName";
+	private static final String APK_PACKAGE_KEY = "package";
+	private static final String ANDROID_MANIFEST_FILE = "AndroidManifest.xml";
+
+	//General attributes
+	private static final String INFO_PLIST_PATTERN = "^(Payload/)(.)+(.app/Info.plist)$";
+	private static final String APP_VERSION = "version";
+	private static final String APP_PACKAGE = "package";
+	private static final String APP_NAME = "name";
+
+	public static Document loadXMLFromString(String xml) throws Exception {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
         InputSource is = new InputSource(new StringReader(xml));
@@ -61,7 +68,7 @@ public class ZipFileReading {
             try {
                 ZipEntry entry;
                 while ((entry = stream.getNextEntry()) != null) {
-                    if (entry.getName().equals("AndroidManifest.xml")) {
+                    if (ANDROID_MANIFEST_FILE.equals(entry.getName())) {
                         StringBuilder builder = new StringBuilder();
                         xml = AndroidXMLParsing.decompressXML(IOUtils
                                 .toByteArray(stream));
@@ -73,9 +80,9 @@ public class ZipFileReading {
             Document doc = loadXMLFromString(xml);
             doc.getDocumentElement().normalize();
             JSONObject obj = new JSONObject();
-            obj.put("version",
+            obj.put(APP_VERSION,
                     doc.getDocumentElement().getAttribute(APK_VERSION_KEY));
-            obj.put("package", doc.getDocumentElement().getAttribute(APK_PACKAGE_KEY));
+            obj.put(APP_PACKAGE, doc.getDocumentElement().getAttribute(APK_PACKAGE_KEY));
             xml = obj.toJSONString();
         } catch (Exception e) {
             xml = "Exception occured " + e;
@@ -93,7 +100,7 @@ public class ZipFileReading {
             try {
                 ZipEntry entry;
                 while ((entry = stream.getNextEntry()) != null) {
-                   	if (entry.getName().matches("^(Payload/)(.)+(.app/Info.plist)$")) {
+                   	if (entry.getName().matches(INFO_PLIST_PATTERN)) {
                         InputStream is = stream;
 
                         int nRead;
@@ -110,9 +117,9 @@ public class ZipFileReading {
                 NSDictionary rootDict = (NSDictionary) BinaryPropertyListParser
                         .parse(buffer.toByteArray());
                 JSONObject obj = new JSONObject();
-                obj.put("version", rootDict.objectForKey(IPA_BUNDLE_VERSION_KEY).toString());
-                obj.put("name", rootDict.objectForKey(IPA_BUNDLE_NAME_KEY).toString());
-                obj.put("package",
+                obj.put(APP_VERSION, rootDict.objectForKey(IPA_BUNDLE_VERSION_KEY).toString());
+                obj.put(APP_NAME, rootDict.objectForKey(IPA_BUNDLE_NAME_KEY).toString());
+                obj.put(APP_PACKAGE,
                         rootDict.objectForKey(IPA_BUNDLE_IDENTIFIER_KEY).toString());
                 plist = obj.toJSONString();
             } catch (Exception e) {
