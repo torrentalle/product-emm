@@ -52,7 +52,7 @@ public class EMMCoreServiceComponent {
 	}
 
 	protected void deactivate(ComponentContext ctx) {
-		log.debug("EMM-Util bundle is deactivated ");
+		log.debug("EMM-Core bundle is deactivated ");
 	}
 
 	protected void setDataSourceService(DataSourceService dataSourceService) {

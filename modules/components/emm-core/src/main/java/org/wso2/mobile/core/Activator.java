@@ -29,12 +29,12 @@ public class Activator implements BundleActivator{
 
     @Override
     public void start(BundleContext bundleContext) throws Exception {
-        log.info("Activating EMM Utils bundle");
+        log.info("Activating EMM Core bundle");
     }
 
     @Override
     public void stop(BundleContext bundleContext) throws Exception {
-        log.info("Stopping EMM Utils bundle");
+        log.info("Stopping EMM Core bundle");
     }
 
 }
