@@ -265,7 +265,7 @@ modules/components/emm-gcm/target
 modules/components/emm-task/target
 modules/components/manifestUtils/target
 modules/components/emm-ui/target
-modules/components/emm-utils/target
+modules/components/emm-core/target
 modules/components/mdm-ui/target
 
 modules/features/org.wso2.emm.feature/target
