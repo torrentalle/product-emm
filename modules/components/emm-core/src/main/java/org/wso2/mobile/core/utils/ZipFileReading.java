@@ -28,6 +28,8 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.json.simple.JSONObject;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
@@ -53,6 +55,8 @@ public class ZipFileReading {
 	private static final String APP_PACKAGE = "package";
 	private static final String APP_NAME = "name";
 
+	private static final Log log = LogFactory.getLog(ZipFileReading.class);
+
 	public static Document loadXMLFromString(String xml) throws Exception {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
@@ -61,7 +65,7 @@ public class ZipFileReading {
     }
 
     public String readAndroidManifestFile(String filePath) {
-        String xml = "";
+        String jsonString = "";
         try {
             ZipInputStream stream = new ZipInputStream(new FileInputStream(
                     filePath));
@@ -70,24 +74,25 @@ public class ZipFileReading {
                 while ((entry = stream.getNextEntry()) != null) {
                     if (ANDROID_MANIFEST_FILE.equals(entry.getName())) {
                         StringBuilder builder = new StringBuilder();
-                        xml = AndroidXMLParsing.decompressXML(IOUtils
+                        jsonString = AndroidXMLParsing.decompressXML(IOUtils
                                 .toByteArray(stream));
                     }
                 }
             } finally {
                 stream.close();
             }
-            Document doc = loadXMLFromString(xml);
+            Document doc = loadXMLFromString(jsonString);
             doc.getDocumentElement().normalize();
             JSONObject obj = new JSONObject();
             obj.put(APP_VERSION,
                     doc.getDocumentElement().getAttribute(APK_VERSION_KEY));
             obj.put(APP_PACKAGE, doc.getDocumentElement().getAttribute(APK_PACKAGE_KEY));
-            xml = obj.toJSONString();
+            jsonString = obj.toJSONString();
         } catch (Exception e) {
-            xml = "Exception occured " + e;
+            jsonString = "Exception occured while parsing the Manifest : " + e.getMessage();
+	        log.error(jsonString,e);
         }
-        return xml;
+        return jsonString;
     }
 
     public String readiOSManifestFile(String filePath, String name) {
@@ -123,13 +128,14 @@ public class ZipFileReading {
                         rootDict.objectForKey(IPA_BUNDLE_IDENTIFIER_KEY).toString());
                 plist = obj.toJSONString();
             } catch (Exception e) {
+	            log.error(e.getMessage(),e);
                 e.printStackTrace();
             } finally {
                 stream.close();
             }
         } catch (Exception e) {
-            plist = "Exception occured " + e;
-            e.printStackTrace();
+            plist = "Exception occured while reading the manifest : " + e.getMessage();
+	        log.error(plist,e);
         }
         return plist;
     }
