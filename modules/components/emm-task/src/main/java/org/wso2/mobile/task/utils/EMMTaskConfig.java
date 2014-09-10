@@ -34,6 +34,7 @@ public class EMMTaskConfig {
     public static final String TASK_NAME = "Monitoring";
     public static final String SERVER_HOST = "server.host";
     public static final String CARBON_LOCAL_IP = "carbon.local.ip";
+    public static final String EMM_SERVER_URL = "EMMServerURL";
     public static final String MGT_TRANSPORT_HTTPS_PROXYPORT = "mgt.transport.https.proxyPort";
     public static final String MGT_TRANSPORT_HTTPS_PORT = "mgt.transport.https.port";
     public static final String LOCALHOST = "localhost";

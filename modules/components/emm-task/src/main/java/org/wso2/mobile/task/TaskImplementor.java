@@ -35,16 +35,23 @@ public class TaskImplementor implements Task {
         // TODO Auto-generated method stub
         GetMethod getMethod = null;
         try {
+
+            String emmServerURL = SystemProperties.getProperty(EMMTaskConfig.EMM_SERVER_URL);
             String host = SystemProperties.getProperty(EMMTaskConfig.SERVER_HOST);
             String ip = SystemProperties.getProperty(EMMTaskConfig.CARBON_LOCAL_IP);
             String port = SystemProperties.getProperty(EMMTaskConfig.MGT_TRANSPORT_HTTPS_PROXYPORT);
             if (port == null)
                 port = SystemProperties.getProperty(EMMTaskConfig.MGT_TRANSPORT_HTTPS_PORT);
+
             String postUrl = "";
-            if (host == null || host == EMMTaskConfig.LOCALHOST) {
-                postUrl = EMMTaskConfig.HTTPS + ip + ":" + port;
+            if (emmServerURL == null) {
+                if (host == null || host == EMMTaskConfig.LOCALHOST) {
+                    postUrl = EMMTaskConfig.HTTPS + ip + ":" + port;
+                } else {
+                    postUrl = EMMTaskConfig.HTTPS + host + ":" + port;
+                }
             } else {
-                postUrl = EMMTaskConfig.HTTPS + host + ":" + port;
+                postUrl = emmServerURL;
             }
 
             getMethod = new GetMethod(postUrl + EMMTaskConfig.MONITOR_URL);

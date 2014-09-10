@@ -21,6 +21,9 @@
 	<DeviceMonitorFrequency>60000</DeviceMonitorFrequency>
 
 	<iOSEMMConfigurations>
+
+        <!--EMMServerURL>http://www.wso2.org</EMMServerURL-->
+
 		<!-- iOS EMM endpoint urls -->
 		<iOSEnrollURL>https://192.168.1.2:9443/emm/scep</iOSEnrollURL>
 		<iOSProfileURL>https://192.168.1.2:9443/emm/profile</iOSProfileURL>
