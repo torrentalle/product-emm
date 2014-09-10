@@ -129,7 +129,6 @@ public class ZipFileReading {
                 plist = obj.toJSONString();
             } catch (Exception e) {
 	            log.error(e.getMessage(),e);
-                e.printStackTrace();
             } finally {
                 stream.close();
             }
