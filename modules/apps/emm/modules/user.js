@@ -8,8 +8,6 @@ var EMM_USER_SESSION = "emmConsoleUser";
 
 var user = (function () {
     var config = require('/config/emm.js').config();
-    var routes = new Array();
-
     var log = new Log();
     var db;
     var driver;
@@ -134,6 +132,32 @@ var user = (function () {
         constructor: module,
         /*User CRUD Operations (Create, Retrieve, Update, Delete)*/
         generatePassword : generatePassword,
+        configureAdminRole:function(ctx){
+            var rolePermissions = driver.query(sqlscripts.permissions.select1, 'admin', ctx.tenantId);
+            log.debug("Role Permissions" + rolePermissions);
+            if (rolePermissions == "") {
+                log.debug("No permissions for admin. Adding default permissions.");
+                var defaultAdminPermission = ["ENTERPRISEWIPE", "ENCRYPT", "MUTE", "CAMERA", "CLEARPASSCODE", "WIPE", "LOCK", "NOTIFICATION", "CHANGEPASSWORD", "LDAP", "VPN", "GOOGLECALENDAR", "EMAIL", "PASSWORDPOLICY", "WEBCLIP", "APN", "WIFI"];
+                driver.query(sqlscripts.permissions.insert1, 'admin', defaultAdminPermission, ctx.tenantId);
+            }
+
+            //this is for automatically publish, publisher and reviewer roles at the time of tenant admin login
+            var um = userManager(ctx.tenantId);
+            var arrPermission = {};
+            arrPermission["/permission/admin/login"] = ["ui.execute"];
+
+            var roles = ["Internal/reviewer", "Internal/publisher", "Internal/store" ];
+            for (var i = 0; i < roles.length; i++) {
+
+                if (um.roleExists(roles[i])) {
+                    um.authorizeRole(roles[i], arrPermission);
+                } else {
+                    log.debug("ROLE CREATED" + roles[i]);
+                    um.addRole(roles[i], [], arrPermission);
+                    um.authorizeRole(roles[i], arrPermission);
+                }
+            }
+        },
         addUser: function(ctx){
             log.debug("Check Params"+stringify(ctx));
             var claimMap = new java.util.HashMap();

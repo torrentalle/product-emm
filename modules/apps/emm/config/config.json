@@ -5,10 +5,10 @@
         "UICOPYRIGHT": "Copyright (c) 2014 - WSO2 .Inc",
         "UILICENSE": "Please enter the EMM Policy.",
         "ANDROID": {
-            "NOTIFIER_INTERVAL" : "60000",
-            "NOTIFIER" : "LOCAL",
-            "APIKEY" : "",
-            "SENDERID" : ""
+            "NOTIFIER_INTERVAL": "60000",
+            "NOTIFIER": "LOCAL",
+            "APIKEY": "",
+            "SENDERID": ""
         },
         "EMAIL": {
             "SMTPHOST": "smtp.gmail.com",
@@ -55,15 +55,15 @@
         "archieve_location_android": "%http.ip%"
     },
     "registry": {
-        "oauthClientKey" : "/_system/governance/emm/OAuthClientKey",
-        "iOSMDMCertificate" : "/_system/governance/emm/MDMCert.pfx",
-        "iOSAppCertificate" : "/_system/governance/emm/WSO2Agent.pfx",
-        "scepConfiguration" : "/_system/governance/emm/SCEPConfig",
-        "androidGCMKeys" : "/_system/governance/emm/AndroidGCM",
-        "tenantLicense" : "/_system/governance/emm/TenantLicense",
-        "copyright" : "/_system/governance/emm/Copyright",
-        "emailConfiguration" : "/_system/governance/emm/EmailConfig",
-        "monitorConfiguration" : "/_system/governance/emm/MonitorConfig"
+        "oauthClientKey": "/_system/governance/emm/OAuthClientKey",
+        "iOSMDMCertificate": "/_system/governance/emm/MDMCert.pfx",
+        "iOSAppCertificate": "/_system/governance/emm/WSO2Agent.pfx",
+        "scepConfiguration": "/_system/governance/emm/SCEPConfig",
+        "androidGCMKeys": "/_system/governance/emm/AndroidGCM",
+        "tenantLicense": "/_system/governance/emm/TenantLicense",
+        "copyright": "/_system/governance/emm/Copyright",
+        "emailConfiguration": "/_system/governance/emm/EmailConfig",
+        "monitorConfiguration": "/_system/governance/emm/MonitorConfig"
     },
     "apiManagerConfigurations": {
         "username": "admin",
@@ -71,6 +71,153 @@
         "apiVersion": "1.0.0",
         "publisherServiceURL": "https://10.10.10.123:9443/publisher",
         "storeServiceURL": "https://10.10.10.123:9443/store",
-        "emmURL":"http://10.10.10.123:9765"
+        "emmURL": "http://10.10.10.123:9765",
+        "deviceAPIs": [
+            {
+                "name": "sender_id",
+                "context": "/emm/api/devices/sender_id",
+                "method": "GET",
+                "description": "Get sender id",
+                "security": "Application & Application User",
+                "tier":"Unlimited",
+                "visibility" :"public API",
+                "tags" : "emm,mobile",
+                "subscriptions":"all_tenants",
+                "tiersCollection":"Unlimited"
+            },
+            {
+                "name": "isregistered",
+                "context": "/emm/api/devices/isregistered",
+                "method": "POST",
+                "description": "Device is registered?",
+                "security": "Application & Application User",
+                "tier":"Unlimited",
+                "visibility" :"public API",
+                "tags" : "emm,mobile",
+                "subscriptions":"all_tenants",
+                "tiersCollection":"Unlimited"
+            },
+            {
+                "name": "license",
+                "context": "/emm/api/devices/license",
+                "method": "GET",
+                "description": "Get license.",
+                "security": "Application & Application User",
+                "tier":"Unlimited",
+                "visibility" :"public API",
+                "tags" : "emm,mobile",
+                "subscriptions":"all_tenants",
+                "tiersCollection":"Unlimited"
+            },
+            {
+                "name": "register",
+                "context": "/emm/api/devices/register",
+                "method": "POST",
+                "description": "Register device.",
+                "security": "Application & Application User",
+                "tier":"Unlimited",
+                "visibility" :"public API",
+                "tags" : "emm,mobile",
+                "subscriptions":"all_tenants",
+                "tiersCollection":"Unlimited"
+            },
+            {
+                "name": "unregister",
+                "context": "/emm/api/devices/unregister",
+                "method": "POST",
+                "description": "Unregister device",
+                "security": "Application & Application User",
+                "tier":"Unlimited",
+                "visibility" :"public API",
+                "tags" : "emm,mobile",
+                "subscriptions":"all_tenants",
+                "tiersCollection":"Unlimited"
+            },
+            {
+                "name": "pendingOperations",
+                "context": "/emm/api/notifications/pendingOperations",
+                "method": "POST",
+                "description": "Get pending operations.",
+                "security": "Application & Application User",
+                "tier":"Unlimited",
+                "visibility" :"public API",
+                "tags" : "emm,mobile",
+                "subscriptions":"all_tenants",
+                "tiersCollection":"Unlimited"
+            },
+            {
+                "name": "clientkey",
+                "context": "/emm/api/devices/clientkey",
+                "method": "POST",
+                "description": "Get client keys.",
+                "security": "None",
+                "tier":"Unlimited",
+                "visibility" :"public API",
+                "tags" : "emm,mobile",
+                "subscriptions":"all_tenants",
+                "tiersCollection":"Unlimited"
+            },
+
+            {
+                "name": "isregisterios",
+                "context": "/emm/api/devices/devices/isregisteredios",
+                "method": "POST",
+                "description": "Register iOS",
+                "security": "None",
+                "tier":"Unlimited",
+                "visibility" :"public API",
+                "tags" : "emm,mobile",
+                "subscriptions":"all_tenants",
+                "tiersCollection":"Unlimited"
+            },
+            {
+                "name": "unregisterios",
+                "context": "/emm/api/devices/unregisterios",
+                "method": "POST",
+                "description": "Un register ios",
+                "security": "None",
+                "tier":"Unlimited",
+                "visibility" :"public API",
+                "tags" : "emm,mobile",
+                "subscriptions":"all_tenants",
+                "tiersCollection":"Unlimited"
+            },
+            {
+                "name": "pushtoken",
+                "context": "/emm/api/devices/pushtoken",
+                "method": "POST",
+                "description": "Pushtoken ios",
+                "security": "None",
+                "tier":"Unlimited",
+                "visibility" :"public API",
+                "tags" : "emm,mobile",
+                "subscriptions":"all_tenants",
+                "tiersCollection":"Unlimited"
+            },
+            {
+                "name": "location",
+                "context": "/emm/api/devices/location",
+                "method": "POST",
+                "description": "Get location.",
+                "security": "None",
+                "tier":"Unlimited",
+                "visibility" :"public API",
+                "tags" : "emm,mobile",
+                "subscriptions":"all_tenants",
+                "tiersCollection":"Unlimited"
+            },
+            {
+                "name": "usersauthenticate",
+                "context": "/emm/api/users/authenticate",
+                "method": "POST",
+                "description": "Authenticate user",
+                "security": "None",
+                "tier":"Unlimited",
+                "visibility" :"public API",
+                "tags" : "emm,mobile",
+                "subscriptions":"all_tenants",
+                "tiersCollection":"Unlimited"
+            }
+        ]
     }
 }
