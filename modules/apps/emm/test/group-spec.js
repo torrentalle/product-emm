@@ -157,7 +157,8 @@ describe('Group Module',function(){
         var user_module = require('/modules/user.js').user;
         var role = 'test_role';
         var username =  "user@test.com";
-        var userObj = {"first_name": "Firstname", "last_name": "Lastname", "mobile_no": "0123456789", "groups": ['subscriber'], "type": "user" ,"username": username,"userid":"user@test.com"};
+        var userObj = {"first_name": "Firstname", "last_name": "Lastname", "mobile_no": "0123456789",
+            "groups": ['subscriber'], "type": "user" ,"username": username,"userid":"user@test.com"};
 
         function initModule() {
             try {
@@ -258,7 +259,8 @@ describe('Group Module',function(){
         var user_module = require('/modules/user.js').user;
         var role = 'test_role';
         var username =  "user@test.com";
-        var userObj = {"first_name": "Firstname", "last_name": "Lastname", "mobile_no": "0123456789", "groups": ['subscriber'], "type": "user" ,"username": username,"userid":"user@test.com"};
+        var userObj = {"first_name": "Firstname", "last_name": "Lastname", "mobile_no": "0123456789",
+            "groups": ['subscriber'], "type": "user" ,"username": username,"userid":"user@test.com"};
 
         function initModule() {
             try {
@@ -369,7 +371,8 @@ describe('Group Module',function(){
         var user_module = require('/modules/user.js').user;
         var role = 'test_role';
         var username =  "user@test.com";
-        var userObj = {"first_name": "Firstname", "last_name": "Lastname", "mobile_no": "0123456789", "groups": ['subscriber'], "type": "user" ,"username": username,"userid":"user@test.com"};
+        var userObj = {"first_name": "Firstname", "last_name": "Lastname", "mobile_no": "0123456789",
+            "groups": ['subscriber'], "type": "user" ,"username": username,"userid":"user@test.com"};
 
         function initModule() {
             try {

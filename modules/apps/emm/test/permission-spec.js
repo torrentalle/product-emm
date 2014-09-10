@@ -24,7 +24,8 @@ describe('Permission Module',function(){
         it('Test assignPermissionToGroup', function () {
             try {
                 tearUp();
-                driver.query("INSERT INTO permissions (role,content,tenant_id) values ('subscriber','[\"LOCK\"]','-1234')");
+                driver.query("INSERT INTO permissions (role,content,tenant_id) values ('subscriber'," +
+                    "'[\"LOCK\"]','-1234')");
                 var result = permission.assignPermissionToGroup(ctx);
                 expect(result).toBe(201);
             } catch (e) {
@@ -59,7 +60,8 @@ describe('Permission Module',function(){
         it('Test getPermission', function () {
             try {
                 tearUp();
-                driver.query("INSERT INTO permissions (role,content,tenant_id) values ('subscriber','[\"LOCK\"]','-1234')");
+                driver.query("INSERT INTO permissions (role,content,tenant_id) values ('subscriber'," +
+                    "'[\"LOCK\"]','-1234')");
                 var result = permission.getPermission(ctx);
                 var feature,content;
                 for(var i=0;i<result.content.length;i++){
