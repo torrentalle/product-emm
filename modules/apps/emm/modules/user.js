@@ -1053,6 +1053,27 @@ var user = (function () {
 
             return tenantDomain;
         },
+
+        //Return Tenant Domain based on the tenant ID
+        getTenantDomainByID : function() {
+            var defaultDomain = "carbon.super"
+            if (arguments[0] == "-1234") {
+                return defaultDomain;
+            }
+            var carbon = require('carbon');
+            var ctx = {};
+            ctx.tenantId = arguments[0];
+            try {
+                var tenantDomain = carbon.server.tenantDomain(ctx);
+                if (tenantDomain == null) {
+                    tenantDomain = defaultDomain;
+                }
+            } catch (e) {
+                tenantDomain = defaultDomain;
+            }
+            return tenantDomain;
+        },
+
         getTouchDownConfig: function(ctx) {
             var data = {};
             var domain = this.getTenantDomainFromID(ctx.tenant_id);

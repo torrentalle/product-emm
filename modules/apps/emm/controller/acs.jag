@@ -28,6 +28,7 @@ sso.acs(function(loggedInUser) {
         userFeed.lastName = objUser["lastName"];
         userFeed.mobile = objUser["mobile"];
         userFeed.tenantDomain = user.getTenantDomainFromID(stringify(objUser["tenantId"]));
+        userFeed.domain = user.getTenantDomainByID(stringify(objUser["tenantId"]));
         var parsedRoles = parse(objUser["roles"]);
         userFeed.roles = parsedRoles;
         var isEMMAdmin = false;

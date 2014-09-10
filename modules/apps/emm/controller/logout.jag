@@ -11,5 +11,5 @@ if (user === null) {
         identityAlias: dataConfi.ssoConfiguration.identityAlias
     }
     sso.configure(dataConfi.ssoConfiguration.issuer, "emm", keyStoreParams, dataConfi.ssoConfiguration.identityProviderURL);
-    sso.logout(user);
+    sso.logout(user.username + '@' + user.domain);
 } %>
