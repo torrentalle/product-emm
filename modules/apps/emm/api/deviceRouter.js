@@ -95,7 +95,7 @@ var device = (function () {
         }
 
         router.get('devices/ios/download', function(ctx) {
-            config = require('/config/config.json');
+            config = require('/config/emm.js').config();
             var iosManifest = compileTemplate("/ios_utils/plisttemplate.hbs", {url:config.device.ios.location, bundleid: config.device.ios.bundleid, bundleversion: config.device.ios.version,  appname: config.device.ios.appname});
             response.contentType = "application/xml";
             print(iosManifest);
@@ -134,7 +134,7 @@ var device = (function () {
 		        response.status = 404;
 		    }
 		});
-		
+
 		router.post('devices/isregisteredios', function(ctx){
 		    var result = device.isRegistered(ctx);
             log.debug(result);
@@ -163,19 +163,19 @@ var device = (function () {
                 var content = device.registerIOS(ctx);
 		    }
 		});
-		
+
 		router.post('devices/iostokenregister', function(ctx){
 		    device.registerIOS(ctx);
 		});
-		
+
 		router.post('devices/pushtoken', function(ctx){
 		    var result = device.saveiOSPushToken(ctx);
 		});
-		
+
 		router.post('devices/location', function(ctx){
 		    var result = device.updateLocation(ctx);
 		});
-		
+
 		router.post('devices/wifimac', function(ctx){
 		    var result = device.getWIFIMac(ctx);
 		    print(result);
@@ -184,7 +184,7 @@ var device = (function () {
 		router.post('devices/unregister', function(ctx){
 		    var result = device.unRegisterAndroid(ctx);
 		});
-		
+
 		router.post('devices/unregisterios', function(ctx){
             var devices = driver.query(sqlscripts.devices.select20, ctx.udid);
             if (devices != null && devices != undefined && devices[0] != null && devices[0] != undefined) {
@@ -288,7 +288,7 @@ var device = (function () {
 		        response.status = 404;
 		    }
 		});
-		
+
         router.post('devices/{deviceid}/WEBCLIP', function(ctx){
             if(common.checkAuth(ctx)){
                 ctx.operation = "WEBCLIP";
