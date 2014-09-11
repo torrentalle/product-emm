@@ -1,6 +1,6 @@
 /*
  * *
- *  *  Copyright (c) WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ *  *  Copyright (c) 2005-2010, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
  *  *
  *  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  *  you may not use this file except in compliance with the License.
@@ -17,6 +17,10 @@
  */
 
 package org.wso2.mobile.core;
+
+/**
+ * Custom exception class of EMMDBInitializer
+ */
 
 public class EMMDBInitializerException extends Exception{
 
