@@ -36,7 +36,7 @@ public class TaskImplementor implements Task {
         GetMethod getMethod = null;
         try {
 
-            String emmServerURL = SystemProperties.getProperty(EMMTaskConfig.EMM_SERVER_URL);
+            String emmServerURL = EMMTaskConfig.getConfigEntry(EMMTaskConfig.EMM_SERVER_URL);
             String host = SystemProperties.getProperty(EMMTaskConfig.SERVER_HOST);
             String ip = SystemProperties.getProperty(EMMTaskConfig.CARBON_LOCAL_IP);
             String port = SystemProperties.getProperty(EMMTaskConfig.MGT_TRANSPORT_HTTPS_PROXYPORT);

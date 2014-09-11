@@ -48,7 +48,7 @@ public class EMMTaskConfig {
 
     private static EMMTaskConfig emmTaskConfig;
     private static Map<String, String> configMap;
-    private static String[] configEntryNames = { DEVICE_MONITOR_FREQUENCY };
+    private static String[] configEntryNames = { DEVICE_MONITOR_FREQUENCY, EMM_SERVER_URL };
 
     private static final Log log = LogFactory.getLog(EMMTaskConfig.class);
 
@@ -92,7 +92,8 @@ public class EMMTaskConfig {
         Map<String, String> configurationMap = readEMMConfigurationXML();
         String configValue = configurationMap.get(entry);
         if (configValue == null) {
-            log.error("Configuration entry not available");
+            //log.error("Configuration entry not available");
+            return null;
         }
         return configValue.trim();
     }
