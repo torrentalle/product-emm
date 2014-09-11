@@ -91,7 +91,7 @@ routeMnger.register('GET', 'publisher', '/publisher/assets/{type}/', function(co
 		});
 	} catch (e) {
 		response.sendError(400, "Your request is malformed");
-		log.debug(e);
+		log.error(e);
 	}
 
 	/*for each(var artifact in artifacts){
@@ -114,6 +114,7 @@ routeMnger.register('GET', 'publisher', '/publisher/assets/{operation}/{type}/',
             });
 
         } catch (e) {
+        	log.error(e);
             response.sendError(404, 'Asset type not found'); //TODO: Replace
         }
 
