@@ -205,16 +205,20 @@ var user = (function () {
             try {
                 var proxy_user = {};
                 var username = ctx.userid;
-
-                if(username.indexOf("@")<1){
+                if (username.indexOf("@") < 1) {
                     username = username+"@carbon.super";
                 }
-                var tenantUser = carbon.server.tenantUser(username);
-
-                if(ctx.login){
-                    var um = userManager(tenantUser.tenantId);
-                }else{
-                    var um = userManager(common.getTenantID());
+                var tenantUser;
+                var um;
+                if (ctx.login){
+                    tenantUser = carbon.server.tenantUser(username);
+                    um = userManager(tenantUser.tenantId);
+                } else {
+                    var tenantId = common.getTenantID();
+                    var tenantDomain = this.getTenantDomainByID(tenantId);
+                    username = username.replace("@", ".") + '@' + tenantDomain;
+                    tenantUser = carbon.server.tenantUser(username);
+                    um = userManager(tenantId);
                 }
                 var user = um.getUser(tenantUser.username);
                 var user_roles = user.getRoles();
@@ -325,14 +329,17 @@ var user = (function () {
             log.debug("User Name >>>>>>>>>"+ctx.username);
             var username = ctx.username;
 
-            if(username.indexOf("@")<1){
-                username = username+"@carbon.super";
+            if (username != null) {
+                if(username.indexOf("@")<1){
+                    username = username+"@carbon.super";
+                }
+                var tenantUser = carbon.server.tenantUser(username);
+                var um = userManager(common.getTenantID());
+                var roles = um.getRoleListOfUser(tenantUser.username);
+                var roleList = common.removePrivateRole(roles);
+                return roleList;
             }
-            var tenantUser = carbon.server.tenantUser(username);
-            var um = userManager(common.getTenantID());
-            var roles = um.getRoleListOfUser(tenantUser.username);
-            var roleList = common.removePrivateRole(roles);
-            return roleList;
+
         },
         updateRoleListOfUser:function(ctx){
             var existingRoles = this.getUserRoles(ctx);
