@@ -35,6 +35,22 @@ import java.util.StringTokenizer;
 class EMMDBInitializer {
 
 	private static final String DBSCRIPTS_LOCATION = "/dbscripts/emm/";
+
+	//DB types
+	private static final String DB_TYPE_ORACLE = "oracle";
+	private static final String DB_TYPE_DB2 = "db2";
+	private static final String DB_TYPE_OPENEDGE = "openedge";
+	private static final String DELIMITER_CHAR = "/";
+	private static final String DB_TYPE_HSQL = "hsql";
+	private static final String DB_TYPE_DERBY = "derby";
+	private static final String DB_TYPE_MYSQL = "mysql";
+	private static final String DB_TYPE_MSSQL = "mssql";
+	private static final String DB_TYPE_H2 = "h2";
+	private static final String DB_TYPE_POSTGRESQL = "postgresql";
+	private static final String DB_TYPE_INFORMIX = "informix";
+
+	private static final String REM_TOKEN = "REM";
+
 	private static Log log = LogFactory.getLog(EMMDBInitializer.class);
 	private static final String DB_CHECK_SQL = "select * from platforms";
 	private DataSource dataSource;
@@ -81,12 +97,12 @@ class EMMDBInitializer {
 		try {
 			String databaseType = getDatabaseType(dataSource.getConnection());
 			boolean keepFormat = false;
-			if ("oracle".equals(databaseType)) {
-				delimiter = "/";
-			} else if ("db2".equals(databaseType)) {
-				delimiter = "/";
-			} else if ("openedge".equals(databaseType)) {
-				delimiter = "/";
+			if (DB_TYPE_ORACLE.equals(databaseType)) {
+				delimiter = DELIMITER_CHAR;
+			} else if (DB_TYPE_DB2.equals(databaseType)) {
+				delimiter = DELIMITER_CHAR;
+			} else if (DB_TYPE_OPENEDGE.equals(databaseType)) {
+				delimiter = DELIMITER_CHAR;
 				keepFormat = true;
 			}
 
@@ -106,7 +122,7 @@ class EMMDBInitializer {
 					StringTokenizer st = new StringTokenizer(line);
 					if (st.hasMoreTokens()) {
 						String token = st.nextToken();
-						if ("REM".equalsIgnoreCase(token)) {
+						if (REM_TOKEN.equalsIgnoreCase(token)) {
 							continue;
 						}
 					}
@@ -155,25 +171,25 @@ class EMMDBInitializer {
 				DatabaseMetaData metaData = conn.getMetaData();
 				String databaseProductName = metaData.getDatabaseProductName();
 				if (databaseProductName.matches("(?i).*hsql.*")) {
-					type = "hsql";
+					type = DB_TYPE_HSQL;
 				} else if (databaseProductName.matches("(?i).*derby.*")) {
-					type = "derby";
+					type = DB_TYPE_DERBY;
 				} else if (databaseProductName.matches("(?i).*mysql.*")) {
-					type = "mysql";
+					type = DB_TYPE_MYSQL;
 				} else if (databaseProductName.matches("(?i).*oracle.*")) {
-					type = "oracle";
+					type = DB_TYPE_ORACLE;
 				} else if (databaseProductName.matches("(?i).*microsoft.*")) {
-					type = "mssql";
+					type = DB_TYPE_MSSQL;
 				} else if (databaseProductName.matches("(?i).*h2.*")) {
-					type = "h2";
+					type = DB_TYPE_H2;
 				} else if (databaseProductName.matches("(?i).*db2.*")) {
-					type = "db2";
+					type = DB_TYPE_DB2;
 				} else if (databaseProductName.matches("(?i).*postgresql.*")) {
-					type = "postgresql";
+					type = DB_TYPE_POSTGRESQL;
 				} else if (databaseProductName.matches("(?i).*openedge.*")) {
-					type = "openedge";
+					type = DB_TYPE_OPENEDGE;
 				} else if (databaseProductName.matches("(?i).*informix.*")) {
-					type = "informix";
+					type = DB_TYPE_INFORMIX;
 				} else {
 					String msg = "Unsupported database: " + databaseProductName +
 					             ". Database will not be created automatically by the WSO2 EMM Server. " +
