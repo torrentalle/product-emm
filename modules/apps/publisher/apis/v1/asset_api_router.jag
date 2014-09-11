@@ -84,6 +84,7 @@ var getBundleID = function(appid){
             }
         }
     }catch(e){
+        log.error(e);
         return null;
     }
 }
@@ -235,9 +236,10 @@ routeManager.register('POST', 'publisher', '/publisher/api/asset/{type}', functi
                     print({"ok" : false, "message" : "Validation failure", "report" : {"failed" : true, "name" : ["App ID is invalid"]}})
                     return;
                 }else{
-                    if(validateAppIdentifier({"overview_appid": meta.package, "overview_version":version},meta.package)){
+                    if(validateAppIdentifier({"overview_packagename": bundleId, "overview_version":version},bundleId)){
                         return;
                     }
+
                     model.set('overview.packagename', bundleId);
                     model.set('overview.appid', meta.package);
                 }
@@ -254,6 +256,9 @@ routeManager.register('POST', 'publisher', '/publisher/api/asset/{type}', functi
             }else if(ctx.platform.toUpperCase()=="IOS" && ctx.markettype!='Market'){
                 if(getExtensionText(meta.path)!="ipa"){
                     print({"ok" : false, "message" : "Validation failure", "report" : {"failed" : true, "name" : ["File uploaded is not supported by iOS"]}})
+                    return;
+                }
+                if(validateAppIdentifier({"overview_packagename": meta.package, "overview_version":version},meta.package)){
                     return;
                 }
             }
@@ -300,22 +305,28 @@ routeManager.register('POST', 'publisher', '/publisher/api/asset/{type}', functi
 
         //var assetModel = getModel(context.post);
 
-        model.save();
+        try{
+             model.save();
+             //var createdAsset = artifactManager.add(assetModel);
+        
+            log.debug('finished saving');
+            
+            //Get the model id
+            var idField = model.get('*.id');
 
-        //var createdAsset = artifactManager.add(assetModel);
-		
-		log.debug('finished saving');
-		
-        //Get the model id
-        var idField = model.get('*.id');
+            log.debug('obtained idField');
 
-		log.debug('obtained idField');
-
-		var asset=model.export('asset.exporter');
-		var assetCachingModule=require('/modules/cache/cache.manager.js').assetCachingModule();
-		var assetCacheManager=new assetCachingModule.AssetCacheManager(session);
-        assetCacheManager.add(asset,shortName);
-
+            var asset=model.export('asset.exporter');
+            var assetCachingModule=require('/modules/cache/cache.manager.js').assetCachingModule();
+            var assetCacheManager=new assetCachingModule.AssetCacheManager(session);
+            
+            assetCacheManager.add(asset,shortName);
+        }catch(e){
+            if(e.javaException.getClass().getName()=="org.wso2.carbon.governance.api.exception.GovernanceException"){
+                print({ok:false,message:'Validation failure',report: {"failed" : true, "name" : ["App name already exists"]}});
+                return;
+            }
+        }
         if (idField) {
             print({ok: 'true', message: 'Asset created.', id: idField.value});
         }
