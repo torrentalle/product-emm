@@ -221,24 +221,26 @@ var user = (function () {
                     um = userManager(tenantId);
                 }
                 var user = um.getUser(tenantUser.username);
-                var user_roles = user.getRoles();
-                var claims = [claimEmail, claimFirstName, claimLastName];
-                var claimResult = user.getClaimsForSet(claims,null);
-                proxy_user.email = claimResult.get(claimEmail);
-                proxy_user.firstName = claimResult.get(claimFirstName);
-                proxy_user.lastName = claimResult.get(claimLastName);
-                proxy_user.mobile = claimResult.get(claimMobile);
-                proxy_user.username = tenantUser.username;
-                proxy_user.tenantId = tenantUser.tenantId;
-                proxy_user.roles = stringify(user_roles);
-                proxy_user.user_type = getUserType(user_roles);
-                if(proxy_user.roles.indexOf('admin') >= 0){
-                    if(proxy_user.firstName ==null){
-                        proxy_user.firstName = 'Admin';
-                        proxy_user.lastName = 'Admin';
+                if (user != null) {
+                    var user_roles = user.getRoles();
+                    var claims = [claimEmail, claimFirstName, claimLastName];
+                    var claimResult = user.getClaimsForSet(claims,null);
+                    proxy_user.email = claimResult.get(claimEmail);
+                    proxy_user.firstName = claimResult.get(claimFirstName);
+                    proxy_user.lastName = claimResult.get(claimLastName);
+                    proxy_user.mobile = claimResult.get(claimMobile);
+                    proxy_user.username = tenantUser.username;
+                    proxy_user.tenantId = tenantUser.tenantId;
+                    proxy_user.roles = stringify(user_roles);
+                    proxy_user.user_type = getUserType(user_roles);
+                    if(proxy_user.roles.indexOf('admin') >= 0){
+                        if(proxy_user.firstName ==null){
+                            proxy_user.firstName = 'Admin';
+                            proxy_user.lastName = 'Admin';
+                        }
                     }
+                    return proxy_user;
                 }
-                return proxy_user;
             } catch(e) {
                 log.error(e);
                 var error = 'Error occurred while retrieving user.';

@@ -99,6 +99,7 @@ var webconsole = (function () {
             if(userType){
                 userType = userType.toLowerCase();
             }
+            log.info("ctx.groupid >>> " + stringify(ctx));
             if(ctx.groupid != null || ctx.groupid != undefined) {
                 all_users = user.getAllUserNamesByRole(ctx);
             } else {
@@ -120,60 +121,62 @@ var webconsole = (function () {
                     break;
                 }
                 var userObj = user.getUser({"userid": all_users[i]});
-                var proxyObj = [userObj.username, userObj.email, userObj.firstName, userObj.lastName];
-                var roles = userObj.roles;
-                if(typeof roles == "undefined"){
-                    log.debug("test");
-                    break main;
-                }
-                var flag = 0;
-                
-               
-                roles = parse(roles);
-                
-                //log.info(roles);
-                if(contains(roles, "admin")){
-                         flag = 1;  
-                    
-                    if(userType){
+                if (userObj != null) {
+                    var proxyObj = [userObj.username, userObj.email, userObj.firstName, userObj.lastName];
+                    var roles = userObj.roles;
+                    if(typeof roles == "undefined"){
+                        log.debug("test");
+                        break main;
+                    }
+                    var flag = 0;
+
+
+                    roles = parse(roles);
+
+                    //log.info(roles);
+                    if(contains(roles, "admin")){
+                        flag = 1;
+
+                        if(userType){
                             if(userType=="emmadmin" || userType=="user"){
                                 continue main;
                             }
-                    }
-                    
-                }else if(contains(roles, "Internal/emmadmin")){
-                         flag = 2;
-                    
-                    if(userType){
+                        }
+
+                    }else if(contains(roles, "Internal/emmadmin")){
+                        flag = 2;
+
+                        if(userType){
                             if(userType=="admin" || userType=="user"){
                                 continue main;
                             }
-                    }
-                    
-                }else{
-                         flag = 3;
-                    
-                    if(userType){
+                        }
+
+                    }else{
+                        flag = 3;
+
+                        if(userType){
                             if(userType=="emmadmin" || userType=="admin"){
                                 continue main;
                             }
+                        }
                     }
+
+                    if(flag == 1){
+                        proxyObj.push('admin');
+                        proxyObj.push('');
+                        proxyObj.push('');
+                    }else if(flag == 2) {;
+                        proxyObj.push('emmadmin');
+                        proxyObj.push('');
+                        proxyObj.push('');
+                    }else{
+                        proxyObj.push('user');
+                        proxyObj.push('');
+                        proxyObj.push('');
+                    }
+                    dataArray.push(proxyObj);
                 }
-                
-                if(flag == 1){
-                    proxyObj.push('admin');
-                    proxyObj.push('');
-                    proxyObj.push('');
-                }else if(flag == 2) {;
-                    proxyObj.push('emmadmin');
-                    proxyObj.push('');
-                    proxyObj.push('');
-                }else{
-                    proxyObj.push('user');
-                    proxyObj.push('');
-                    proxyObj.push('');
-                }
-                dataArray.push(proxyObj);
             };
             var finalObj = {};
             finalObj.sEcho = ctx.sEcho;
