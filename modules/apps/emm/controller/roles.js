@@ -16,7 +16,7 @@ var device = new deviceModule(db);
 var user_groupModule = require('/modules/user_group.js').user_group;
 var user_group = new user_groupModule(db);
 
-
+/*
 configuration = function(appController){
 
 	context = appController.context();
@@ -47,7 +47,7 @@ configuration = function(appController){
 	return context;
 
 };
-
+*/
 
 management = function(appController){
 	context = appController.context();

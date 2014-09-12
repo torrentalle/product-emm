@@ -157,26 +157,22 @@ navigation = function(role) {
         if(role == 'admin'){
             topNavigation = [
                 {name : "Dashboard"	, link: appInfo().server_url + "console/dashboard", displayPage: "dashboard", icon: "icon-th-large"},
-                {name : "Configurations", link: appInfo().server_url + "users/configuration", displayPage: "configuration", icon:"icon-wrench"},
+                {name : "Configurations", link: appInfo().server_url + "policies/configuration", displayPage: "configuration", icon:"icon-wrench"},
                 {name : "Device Management"	, link: appInfo().server_url + "devices/management", displayPage: "management", icon:"icon-mobile-phone"},
-                 {name : "Reports"	, link: appInfo().server_url + "reports/", displayPage: "reports", icon:"icon-bar-chart"}               
+                {name : "Reports"	, link: appInfo().server_url + "reports/", displayPage: "reports", icon:"icon-bar-chart"}
             ];
             var configNavigation =	[
-                {name : "Users", link: appInfo().server_url + "users/configuration", displayPage: "users", icon:"icon-user"},
-                {name : "Roles", link: appInfo().server_url + "roles/configuration", displayPage: "roles", icon:"icon-group"},
                 {name : "Policies", link: appInfo().server_url + "policies/configuration", displayPage: "policies", icon:"icon-lock"},
                 {name : "Settings", link: appInfo().server_url + "tenant/configuration", displayPage: "tenant", icon:"icon-gear"},
             ];
         }else if(role == 'emmadmin'){
             topNavigation = [
                 {name : "Dashboard"	, link: appInfo().server_url + "console/dashboard", displayPage: "dashboard", icon: "icon-th-large"},
-                {name : "Configurations", link: appInfo().server_url + "users/configuration", displayPage: "configuration", icon:"icon-wrench"},
-                 {name : "Device Management"	, link: appInfo().server_url + "devices/management", displayPage: "management", icon:"icon-mobile-phone"},
-                 {name : "Reports"	, link: appInfo().server_url + "reports/", displayPage: "reports", icon:"icon-bar-chart"}
+                {name : "Configurations", link: appInfo().server_url + "policies/configuration", displayPage: "configuration", icon:"icon-wrench"},
+                {name : "Device Management"	, link: appInfo().server_url + "devices/management", displayPage: "management", icon:"icon-mobile-phone"},
+                {name : "Reports"	, link: appInfo().server_url + "reports/", displayPage: "reports", icon:"icon-bar-chart"}
             ];
             var configNavigation =	[
-                {name : "Users", link: appInfo().server_url + "users/configuration", displayPage: "users", icon:"icon-user"},
-                {name : "Roles", link: appInfo().server_url + "roles/configuration", displayPage: "roles", icon:"icon-group"},
                 {name : "Policies", link: appInfo().server_url + "policies/configuration", displayPage: "policies", icon:"icon-lock"},
             ];
         }else{

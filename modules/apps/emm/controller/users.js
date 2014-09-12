@@ -15,6 +15,7 @@ var notification = new notificationModule(db);
 
 var common = require("/modules/common.js");
 
+/*
 configuration = function(appController) {
 	context = appController.context();
 	context.title = context.title + " | Configuration";
@@ -26,6 +27,7 @@ configuration = function(appController) {
 	};
 	return context;
 };
+*/
 
 
 add = function(appController) {
