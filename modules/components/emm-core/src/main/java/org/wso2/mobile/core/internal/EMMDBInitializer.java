@@ -52,6 +52,7 @@ class EMMDBInitializer {
 	private static final String REM_TOKEN = "REM";
 
 	private static Log log = LogFactory.getLog(EMMDBInitializer.class);
+	//DB validation query
 	private static final String DB_CHECK_SQL = "select * from platforms";
 	private DataSource dataSource;
 	private String delimiter = ";";
@@ -61,6 +62,9 @@ class EMMDBInitializer {
 		this.dataSource = dataSource;
 	}
 
+	/*
+	* This method will create the EMM Database if the EMM DB tables does not exists.
+	*/
 	void createEMMDatabase() throws EMMDBInitializerException {
 		if (!isDatabaseStructureCreated()) {
 			Connection conn = null;
@@ -89,6 +93,11 @@ class EMMDBInitializer {
 		}
 	}
 
+	/*
+	* This method will execute the sql script in dbscripts/emm folder.
+	* Throws EMMDBInitializerException if the sql script does not exists or
+	* if the script has some errors.
+	*/
 	private void executeSQLScript() throws EMMDBInitializerException {
 
 		StringBuffer sql = new StringBuffer();
@@ -145,7 +154,8 @@ class EMMDBInitializer {
 				executeSQL(sql.toString());
 			}
 		} catch (IOException e) {
-			String msg = "Error occurred while opening the SQL script file for creating emm database";
+			String msg =
+					"Error occurred while opening the SQL script file for creating emm database";
 			log.error(msg, e);
 			throw new EMMDBInitializerException(msg, e);
 
@@ -164,6 +174,11 @@ class EMMDBInitializer {
 		}
 	}
 
+	/*
+	* This method has used to get the db type using db connection metadata.
+	* Throws EMMDBInitializerException if the db type is unsupported or
+	* fail to get connection meta-data.
+	*/
 	private String getDatabaseType(Connection conn) throws EMMDBInitializerException {
 		String type = null;
 		try {
@@ -217,13 +232,6 @@ class EMMDBInitializer {
 	/**
 	 * Checks that a string buffer ends up with a given string.
 	 *
-	 * @param buffer the buffer to perform the check on
-	 * @param suffix the suffix
-	 * @return <code>true</code> if the character sequence represented by the
-	 * argument is a suffix of the character sequence represented by
-	 * the StringBuffer object; <code>false</code> otherwise. Note that the
-	 * result will be <code>true</code> if the argument is the
-	 * empty string.
 	 */
 	private boolean checkStringBufferEndsWith(StringBuffer buffer, String suffix) {
 		if (suffix.length() > buffer.length()) {
@@ -243,9 +251,6 @@ class EMMDBInitializer {
 
 	/**
 	 * Executes given sql statement
-	 *
-	 * @param sql
-	 * @throws Exception
 	 */
 	private void executeSQL(String sql) throws EMMDBInitializerException {
 		// Check and ignore empty statements
@@ -287,7 +292,8 @@ class EMMDBInitializer {
 				log.info("Table Already Exists. Hence, skipping table creation");
 
 			} else {
-				throw new EMMDBInitializerException("Error occurred while executing sql statement: " + sql, e);
+				throw new EMMDBInitializerException(
+						"Error occurred while executing sql statement: " + sql, e);
 			}
 		} finally {
 			if (resultSet != null) {
@@ -301,9 +307,7 @@ class EMMDBInitializer {
 	}
 
 	/**
-	 * Checks whether database tables are created.
-	 *
-	 * @return <code>true</core> if checkSQL is success, else <code>false</code>.
+	 * Checks whether database tables are created using a validation query
 	 */
 	private boolean isDatabaseStructureCreated() {
 		try {

@@ -72,6 +72,9 @@ public class EMMCoreServiceComponent {
 		carbonDataSourceService = null;
 	}
 
+	/*
+	* This method will initialize the EMM Database creation
+	*/
 	private void initializeDatabase() throws EMMDBInitializerException {
 		try {
 			CarbonDataSource cds = carbonDataSourceService.getDataSource(EMM_DB_NAME);
