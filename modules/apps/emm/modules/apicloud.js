@@ -189,9 +189,11 @@ var apimgr = (function () {
         },
         initAPISubscription: function (tenantInfo) {
             //check for super tenant
+            /*
             if (tenantInfo.tenantId == "-1234") {
                 this.publishEMMAPIs();
             }
+            */
             return this.subscribeEMMAPIs(tenantInfo);
         },
         subscribeEMMAPIs: function (tenantInfo) {
