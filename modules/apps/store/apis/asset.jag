@@ -43,7 +43,7 @@ require('/modules/store.js').exec(function (ctx) {
             } else {
                 //request formats: GET /store/apis/asset/gadget?start=4
                 //                 GET /store/apis/asset/gadget?start=4&count=7
-                var assetsFunc = isMyAsset ? store.userAssets : store.assets;
+                var assetsFunc = isMyAsset ? store.subscriptions : store.assets;
                 print(assetsFunc.call(store, type, {
                     start: Number(request.getParameter('start')) || 0,
                     count: Number(request.getParameter('count')) || 50000,
