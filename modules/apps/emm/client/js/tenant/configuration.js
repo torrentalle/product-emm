@@ -180,8 +180,10 @@ $('#iosMDMCert').change(function(){
 function toggleAPNSCerts(){
     if($('#iosAPNSCertModified').val() == "true"){
         $('#iosAPNSPass').prop('disabled',false);
+        $('#iosAPNSMode').prop('disabled',false);
     }else{
         $('#iosAPNSPass').prop('disabled',true);
+        $('#iosAPNSMode').prop('disabled',true);
     }
 }
 
@@ -190,8 +192,10 @@ function toggleMDMCerts(){
     if($('#iosMDMCertModified').val() == "true"){
         $('#iosMDMPass').prop('disabled',false);
         $('#iosMDMTopic').prop('disabled',false);
+        $('#iosMDMMode').prop('disabled',false);
     }else{
         $('#iosMDMPass').prop('disabled',true);
         $('#iosMDMTopic').prop('disabled',true);
+        $('#iosMDMMode').prop('disabled',true);
     }
 }
